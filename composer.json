@@ -1,16 +1,18 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "lloricode/laravel-paymaya-sdk",
+    "description": "SDK for Paymaya using Laravel",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "lloricode",
+        "paymaya",
+        "sdk",
+        "laravel"
     ],
-    "homepage": "https://github.com/:vendor_name/:package_name",
+    "homepage": "https://github.com/lloricode/laravel-paymaya-sdk",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Lloric Mayuga Garcia",
+            "email": "lloricode@gmail.com",
             "role": "Developer"
         }
     ],
@@ -27,13 +29,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src",
-            "Spatie\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Lloricode\\LaravelPaymaya\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Lloricode\\LaravelPaymaya\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -47,10 +48,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\Skeleton\\SkeletonServiceProvider"
+                "Lloricode\\LaravelPaymaya\\LaravelPaymayaServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "Spatie\\Skeleton\\SkeletonFacade"
+                "LaravelPaymaya": "Lloricode\\LaravelPaymaya\\LaravelPaymayaFacade"
             }
         }
     },

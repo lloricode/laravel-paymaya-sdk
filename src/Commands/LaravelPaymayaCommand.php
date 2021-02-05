@@ -1,12 +1,12 @@
 <?php
 
-namespace Spatie\Skeleton\Commands;
+namespace Lloricode\LaravelPaymaya\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelPaymayaCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-paymaya-sdk';
 
     public $description = 'My command';
 

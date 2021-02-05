@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Lloricode\LaravelPaymaya\Tests;
 
 class ExampleTest extends TestCase
 {
