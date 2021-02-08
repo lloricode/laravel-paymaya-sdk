@@ -8,7 +8,7 @@ use Lloricode\Paymaya\PaymayaClient;
 /**
  * @mixin PaymayaClient
  */
-class PaymayaClientFacade extends Facade
+class ClientFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {

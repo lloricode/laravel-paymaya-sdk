@@ -5,7 +5,7 @@ namespace Lloricode\LaravelPaymaya\Tests\Commands;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Lloricode\LaravelPaymaya\Facades\PaymayaClientFacade;
+use Lloricode\LaravelPaymaya\Facades\ClientFacade;
 use Lloricode\LaravelPaymaya\Tests\TestCase;
 use Lloricode\Paymaya\Request\Checkout\WebhookRequest;
 
@@ -26,7 +26,7 @@ class WebhookCommandTest extends TestCase
             )
         );
 
-        PaymayaClientFacade::setHandlerStack($handlerStack);
+        ClientFacade::setHandlerStack($handlerStack);
 
         $this->artisan('paymaya-sdk:webhook:retrieve')
 //            ->expectsTable(
@@ -110,7 +110,7 @@ class WebhookCommandTest extends TestCase
             )
         );
 
-        PaymayaClientFacade::setHandlerStack($handlerStack);
+        ClientFacade::setHandlerStack($handlerStack);
 
         $this->artisan('paymaya-sdk:webhook:register')
             ->expectsOutput('Done Registering webhooks')
