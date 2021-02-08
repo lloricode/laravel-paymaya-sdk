@@ -5,7 +5,8 @@
         "lloricode",
         "paymaya",
         "sdk",
-        "laravel"
+        "laravel",
+        "php"
     ],
     "homepage": "https://github.com/lloricode/laravel-paymaya-sdk",
     "license": "MIT",
@@ -58,5 +59,15 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/lloricde"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/lloricode/laravel-paymaya-sdk/issues",
+        "source": "https://github.com/lloricode/laravel-paymaya-sdk"
+    }
 }
