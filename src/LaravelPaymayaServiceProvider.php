@@ -35,6 +35,7 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
                 $s = $config['keys']['secret'];
                 $p = $config['keys']['public'];
                 $m = $config['mode'];
+
                 return new PaymayaClient($s, $p, $m);
             }
         );
