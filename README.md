@@ -56,8 +56,6 @@ return [
 
 ## Usage
 
-## Usage
-
 You can copy the sample to test it.
 
 ### Checkout
