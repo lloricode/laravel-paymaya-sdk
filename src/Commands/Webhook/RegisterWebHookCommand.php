@@ -21,12 +21,17 @@ class RegisterWebHookCommand extends Command
         $this->paymayaClient = $paymayaClient;
     }
 
-    public function handle()
+    /**
+     * @return void
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     *
+     */
+    public function handle(): void
     {
-        WebhookClient::new($this->paymayaClient)->deleteAll();
+        (new WebhookClient($this->paymayaClient))->deleteAll();
 
         foreach (config('paymaya-sdk.webhooks') as $name => $url) {
-            WebhookClient::new($this->paymayaClient)
+            (new WebhookClient($this->paymayaClient))
                 ->register(
                     WebhookRequest::new()
                         ->setName($name)
