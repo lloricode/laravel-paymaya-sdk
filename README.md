@@ -59,8 +59,24 @@ return [
 
 ## Usage
 
-```php
-# TODO: readme
+### webhooks
+
+```
+# register webhooks
+php artisan paymaya-sdk:webhook:register
+
+# retrieve webhooks
+php artisan paymaya-sdk:webhook:retrieve
+
+# retrieve output
++--------+------------------+------------------------------+---------------------+---------------------+
+| id     | name             | callbackUrl                  | createdAt           | updatedAt           |
++--------+------------------+------------------------------+---------------------+---------------------+
+| <uuid> | CHECKOUT_SUCCESS | http://localhost/api/success | 2021-02-05 17:40:40 | 2021-02-05 17:40:40 |
+| <uuid> | CHECKOUT_FAILURE | http://localhost/api/failed  | 2021-02-05 17:40:45 | 2021-02-05 17:40:45 |
+| <uuid> | CHECKOUT_DROPOUT | http://localhost/api/dropout | 2021-02-05 17:40:45 | 2021-02-05 17:40:45 |
++--------+------------------+------------------------------+---------------------+---------------------+
+
 ```
 
 ## Testing
