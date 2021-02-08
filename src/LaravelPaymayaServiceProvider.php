@@ -26,11 +26,11 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
     /**
      * @return void
      */
-    public function packageRegistered()
+    public function packageBooted()
     {
         $this->app->singleton(
             PaymayaClient::class,
-            fn () => new PaymayaClient(
+            fn() => new PaymayaClient(
                 config('paymaya-sdk.keys.secret'),
                 config('paymaya-sdk.keys.public'),
                 config('paymaya-sdk.mode'),
