@@ -6,6 +6,11 @@
 
 Paymaya SDK for laravel, it uses [paymaya-sdk-php](https://github.com/lloricode/paymaya-sdk-php).
 
+- [Installation](#installation)
+- [Usage](#usage)
+    - [Checkout](#checkout)
+    - [Webhooks Checkout](#checkout-webhook)
+
 ## Installation
 
 You can install the package via composer:
@@ -15,6 +20,7 @@ composer require lloricode/laravel-paymaya-sdk
 ```
 
 You can publish the config file with:
+
 ```bash
 php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider" --tag="laravel-paymaya-sdk-config"
 ```
@@ -50,10 +56,135 @@ return [
 
 ## Usage
 
-### webhooks
+## Usage
+
+You can copy the sample to test it.
+
+### Checkout
+
+https://developers.paymaya.com/blog/entry/paymaya-checkout-api-overview
+
+``` php
+use Carbon\Carbon;
+use PaymayaSDKCheckoutClient;
+use Lloricode\Paymaya\PaymayaClient;
+use Lloricode\Paymaya\Request\Checkout\Amount\AmountDetailRequest;
+use Lloricode\Paymaya\Request\Checkout\Amount\AmountRequest;
+use Lloricode\Paymaya\Request\Checkout\Buyer\BillingAddressRequest;
+use Lloricode\Paymaya\Request\Checkout\Buyer\BuyerRequest;
+use Lloricode\Paymaya\Request\Checkout\Buyer\ContactRequest;
+use Lloricode\Paymaya\Request\Checkout\Buyer\ShippingAddressRequest;
+use Lloricode\Paymaya\Request\Checkout\CheckoutRequest;
+use Lloricode\Paymaya\Request\Checkout\ItemRequest;
+use Lloricode\Paymaya\Request\Checkout\MetaDataRequest;
+use Lloricode\Paymaya\Request\Checkout\RedirectUrlRequest;
+use Lloricode\Paymaya\Request\Checkout\TotalAmountRequest;
+
+$checkout = (new CheckoutRequest())
+    ->setTotalAmountRequest(
+        (new TotalAmountRequest())
+            ->setValue(100)
+            ->setAmountRequest(
+                (new AmountDetailRequest())
+                    ->setSubtotal(100)
+            )
+    )
+    ->setBuyerRequest(
+        (new BuyerRequest())
+            ->setFirstName('John')
+            ->setMiddleName('Paul')
+            ->setLastName('Doe')
+            ->setBirthDate(Carbon::parse('1995-10-24'))
+            ->setCustomerSince(Carbon::parse('1995-10-24'))
+            ->setGender('M')
+            ->setContactRequest(
+                (new ContactRequest())
+                    ->setPhone('+639181008888')
+                    ->setEmail('merchant@merchantsite.com')
+            )
+            ->setShippingAddressRequest(
+                (new ShippingAddressRequest())
+                    ->setFirstName('John')
+                    ->setMiddleName('Paul')
+                    ->setLastName('Doe')
+                    ->setPhone('+639181008888')
+                    ->setEmail('merchant@merchantsite.com')
+                    ->setLine1('6F Launchpad')
+                    ->setLine2('Reliance Street')
+                    ->setCity('Mandaluyong City')
+                    ->setState('Metro Manila')
+                    ->setZipCode('1552')
+                    ->setCountryCode('PH')
+                    ->setShippingType('ST')
+            )
+            ->setBillingAddressRequest(
+                (new BillingAddressRequest())
+                    ->setLine1('6F Launchpad')
+                    ->setLine2('Reliance Street')
+                    ->setCity('Mandaluyong City')
+                    ->setState('Metro Manila')
+                    ->setZipCode('1552')
+                    ->setCountryCode('PH')
+            )
+    )
+    ->addItemRequest(
+        (new ItemRequest())
+            ->setName('Canvas Slip Ons')
+            ->setQuantity(1)
+            ->setCode('CVG-096732')
+            ->setDescription('Shoes')
+            ->setAmountRequest(
+                (new AmountRequest())
+                    ->setValue(100)
+                    ->setAmountRequest(
+                        (new AmountDetailRequest())
+                            ->setDiscount(0)
+                            ->setServiceCharge(0)
+                            ->setShippingFee(0)
+                            ->setTax(0)
+                            ->setSubtotal(100)
+                    )
+            )
+            ->setTotalAmountRequest(
+                (new AmountRequest())
+                    ->setValue(100)
+                    ->setAmountRequest(
+                        (new AmountDetailRequest())
+                            ->setDiscount(0)
+                            ->setServiceCharge(0)
+                            ->setShippingFee(0)
+                            ->setTax(0)
+                            ->setSubtotal(100)
+                    )
+            )
+    )
+    ->setRedirectUrlRequest(
+        (new RedirectUrlRequest())
+            ->setSuccess('https://www.merchantsite.com/success')
+            ->setFailure('https://www.merchantsite.com/failure')
+            ->setCancel('https://www.merchantsite.com/cancel')
+    )->setRequestReferenceNumber('1551191039')
+    ->setMetaDataRequest(
+        (new MetaDataRequest())
+            ->setSMI('smi')
+            ->setSMN('smn')
+            ->setMCI('mci')
+            ->setMPC('mpc')
+            ->setMCO('mco')
+            ->setMST('mst')
+    );
+
+$checkoutResponse = PaymayaSDKCheckoutClient::execute($this->checkout);
+
+echo 'id: '.$checkoutResponse->getId()."\n";
+echo 'url: '.$checkoutResponse->getUrl()."\n";
+```
+
+### Checkout Webhook
 
 ```
-# register webhooks
+# see config `paymaya-sdk.webhooks` array to set your webhooks,
+# then run this to register webhooks.
 php artisan paymaya-sdk:webhook:register
 
 # retrieve webhooks
