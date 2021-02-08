@@ -16,8 +16,8 @@ return [
      *
      */
     'webhooks' => [
-        WebhookRequest::SUCCESS => url('api/payment-callback/paymaya/success'),
-        WebhookRequest::FAILURE => url('api/payment-callback/paymaya/failure'),
-        WebhookRequest::DROPOUT => url('api/payment-callback/paymaya/dropout'),
+        WebhookRequest::SUCCESS => 'api/payment-callback/paymaya/success',
+        WebhookRequest::FAILURE => 'api/payment-callback/paymaya/failure',
+        WebhookRequest::DROPOUT => 'api/payment-callback/paymaya/dropout',
     ],
 ];

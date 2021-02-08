@@ -35,7 +35,7 @@ class RegisterWebHookCommand extends Command
                 ->register(
                     WebhookRequest::new()
                         ->setName($name)
-                        ->setCallbackUrl($url)
+                        ->setCallbackUrl(url($url))
                 );
         }
 
