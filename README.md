@@ -172,7 +172,7 @@ $checkout = (new CheckoutRequest())
             ->setMST('mst')
     );
 
-$checkoutResponse = PaymayaSDKCheckoutClient::execute($this->checkout);
+$checkoutResponse = PaymayaSDKCheckoutClient::execute($checkout);
 
 echo 'id: '.$checkoutResponse->getId()."\n";
 echo 'url: '.$checkoutResponse->getUrl()."\n";
