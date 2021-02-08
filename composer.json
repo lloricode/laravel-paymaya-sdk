@@ -20,7 +20,7 @@
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/contracts": "^8.0",
-        "lloricode/paymaya-sdk-php": "dev-master",
+        "lloricode/paymaya-sdk-php": "^0.2.2",
         "spatie/laravel-package-tools": "^1.1"
     },
     "require-dev": {
