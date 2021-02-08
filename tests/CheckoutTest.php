@@ -14,7 +14,6 @@ use Lloricode\Paymaya\Test\TestHelper;
 
 class CheckoutTest extends TestCase
 {
-
     /**
      * @test
      */
