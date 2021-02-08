@@ -31,7 +31,7 @@ class CheckoutTest extends TestCase
                     json_encode(
                         [
                             'checkoutId' => $id,
-                            'redirectUrl' => 'http://test',
+                            'redirectUrl' => $url,
                         ]
                     ),
                 ),
