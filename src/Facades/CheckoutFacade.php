@@ -3,10 +3,10 @@
 namespace Lloricode\LaravelPaymaya\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Lloricode\LaravelPaymaya\CheckoutClient;
+use Lloricode\Paymaya\Client\Checkout\CheckoutClient;
 
 /**
- * @mixin CheckoutClient
+ * @mixin \Lloricode\Paymaya\Client\Checkout\CheckoutClient
  */
 class CheckoutFacade extends Facade
 {
