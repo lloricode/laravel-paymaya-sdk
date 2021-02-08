@@ -23,13 +23,6 @@ You can install the package via composer:
 composer require lloricode/laravel-paymaya-sdk
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider" --tag="laravel-paymaya-sdk-migrations"
-php artisan migrate
-```
-
 You can publish the config file with:
 ```bash
 php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider" --tag="laravel-paymaya-sdk-config"
@@ -38,15 +31,36 @@ php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaSe
 This is the contents of the published config file:
 
 ```php
+<?php
+
+use Lloricode\Paymaya\PaymayaClient;
+use Lloricode\Paymaya\Request\Checkout\WebhookRequest;
+
 return [
+    'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
+    'keys' => [
+        'public' => env('PAYMAYA_PUBLIC_KEY', ''),
+        'secret' => env('PAYMAYA_SECRET_KEY', ''),
+    ],
+
+    /**
+     *
+     * Webhooks
+     *
+     */
+    'webhooks' => [
+        WebhookRequest::SUCCESS => url('api/payment-callback/paymaya/success'),
+        WebhookRequest::FAILURE => url('api/payment-callback/paymaya/failure'),
+        WebhookRequest::DROPOUT => url('api/payment-callback/paymaya/dropout'),
+    ],
 ];
+
 ```
 
 ## Usage
 
 ```php
-$laravel-paymaya-sdk = new Lloricode\LaravelPaymaya();
-echo $laravel-paymaya-sdk->echoPhrase('Hello, Lloricode!');
+# TODO: readme
 ```
 
 ## Testing

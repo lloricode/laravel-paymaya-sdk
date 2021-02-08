@@ -2,7 +2,9 @@
 
 namespace Lloricode\LaravelPaymaya;
 
-use Lloricode\LaravelPaymaya\Commands\LaravelPaymayaCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\RegisterWebHookCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\RetrieveWebhookCommand;
+use Lloricode\Paymaya\PaymayaClient;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -11,8 +13,25 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('paymaya-sdk')
+            ->name('laravel-paymaya-sdk')
             ->hasConfigFile()
-            ->hasCommand(LaravelPaymayaCommand::class);
+            ->hasCommands(
+                [
+                    RetrieveWebhookCommand::class,
+                    RegisterWebHookCommand::class,
+                ]
+            );
+    }
+
+    public function packageRegistered()
+    {
+        $this->app->singleton(
+            PaymayaClient::class,
+            fn() => new PaymayaClient(
+                config('paymaya-sdk.keys.secret'),
+                config('paymaya-sdk.keys.public'),
+                config('paymaya-sdk.mode'),
+            )
+        );
     }
 }
