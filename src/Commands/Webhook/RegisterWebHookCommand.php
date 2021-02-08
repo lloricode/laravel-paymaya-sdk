@@ -23,6 +23,8 @@ class RegisterWebHookCommand extends Command
 
     public function handle()
     {
+        WebhookClient::new($this->paymayaClient)->deleteAll();
+
         foreach (config('paymaya-sdk.webhooks') as $name => $url) {
             WebhookClient::new($this->paymayaClient)
                 ->register(

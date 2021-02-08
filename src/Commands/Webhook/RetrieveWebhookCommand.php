@@ -33,7 +33,7 @@ class RetrieveWebhookCommand extends Command
 
         foreach (
             WebhookClient::new($this->paymayaClient)
-                ->retrieve() as $name => $webhookResponse
+                ->retrieve() as $webhookResponse
         ) {
             $return[] = [
                 $webhookResponse->getId(),

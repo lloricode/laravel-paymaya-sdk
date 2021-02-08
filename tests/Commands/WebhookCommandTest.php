@@ -49,6 +49,27 @@ class WebhookCommandTest extends TestCase
         $handlerStack = HandlerStack::create(
             new MockHandler(
                 [
+                    new Response( //retrieve
+                        200,
+                        [],
+                        json_encode(
+                            [
+                                self::sampleWebhookData(),
+                            ],
+                        ),
+                    ),
+                    new Response( // delete response
+                        200,
+                        [],
+                        json_encode(
+                            self::sampleWebhookData(
+                                [
+                                    'name' => WebhookRequest::SUCCESS,
+                                    'id' => 'test-generated-id1',
+                                ]
+                            ),
+                        ),
+                    ),
                     new Response(
                         200,
                         [],
