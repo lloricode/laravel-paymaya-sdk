@@ -36,8 +36,8 @@ use Lloricode\Paymaya\Request\Checkout\Webhook;
 return [
     'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
     'keys' => [
-        'public' => env('PAYMAYA_PUBLIC_KEY', ''),
-        'secret' => env('PAYMAYA_SECRET_KEY', ''),
+        'public' => env('PAYMAYA_PUBLIC_KEY'),
+        'secret' => env('PAYMAYA_SECRET_KEY'),
     ],
 
     /**
