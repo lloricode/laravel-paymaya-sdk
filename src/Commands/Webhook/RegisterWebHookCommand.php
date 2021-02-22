@@ -3,8 +3,7 @@
 namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 
 use Illuminate\Console\Command;
-use Lloricode\Paymaya\Client\Checkout\WebhookClient;
-use Lloricode\Paymaya\PaymayaClient;
+use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Request\Checkout\Webhook;
 
 class RegisterWebHookCommand extends Command
@@ -13,14 +12,6 @@ class RegisterWebHookCommand extends Command
 
     public $description = 'Register webhook';
 
-    private PaymayaClient $paymayaClient;
-
-    public function __construct(PaymayaClient $paymayaClient)
-    {
-        parent::__construct();
-        $this->paymayaClient = $paymayaClient;
-    }
-
     /**
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -28,10 +19,10 @@ class RegisterWebHookCommand extends Command
      */
     public function handle(): void
     {
-        (new WebhookClient($this->paymayaClient))->deleteAll();
+        PaymayaFacade::webhook()->deleteAll();
 
         foreach (config('paymaya-sdk.webhooks') as $name => $url) {
-            (new WebhookClient($this->paymayaClient))
+            PaymayaFacade::webhook()
                 ->register(
                     (new Webhook())
                         ->setName($name)

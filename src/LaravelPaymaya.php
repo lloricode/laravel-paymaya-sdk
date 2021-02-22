@@ -4,7 +4,9 @@ namespace Lloricode\LaravelPaymaya;
 
 use Lloricode\LaravelPaymaya\Facades\CheckoutFacade;
 use Lloricode\LaravelPaymaya\Facades\ClientFacade;
+use Lloricode\LaravelPaymaya\Facades\WebhookFacade;
 use Lloricode\Paymaya\Client\Checkout\CheckoutClient;
+use Lloricode\Paymaya\Client\Checkout\WebhookClient;
 use Lloricode\Paymaya\PaymayaClient;
 
 class LaravelPaymaya
@@ -17,5 +19,10 @@ class LaravelPaymaya
     public static function checkout(): CheckoutClient
     {
         return CheckoutFacade::getFacadeRoot();
+    }
+
+    public static function webhook(): WebhookClient
+    {
+        return WebhookFacade::getFacadeRoot();
     }
 }

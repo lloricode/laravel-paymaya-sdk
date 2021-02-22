@@ -54,8 +54,9 @@
                 "Lloricode\\LaravelPaymaya\\LaravelPaymayaServiceProvider"
             ],
             "aliases": {
-                "PaymayaClient": "Lloricode\\LaravelPaymaya\\Facades\\ClientFacade",
-                "PaymayaCheckoutClient": "Lloricode\\LaravelPaymaya\\Facades\\CheckoutFacade",
+                "PaymayaSDKClient": "Lloricode\\LaravelPaymaya\\Facades\\ClientFacade",
+                "PaymayaSDKCheckoutClient": "Lloricode\\LaravelPaymaya\\Facades\\CheckoutFacade",
+                "PaymayaSDKWebhhokClient": "Lloricode\\LaravelPaymaya\\Facades\\WebhookFacade",
                 "PaymayaSDK": "Lloricode\\LaravelPaymaya\\Facades\\PaymayaFacade"
             }
         }

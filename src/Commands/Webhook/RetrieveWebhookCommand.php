@@ -3,22 +3,13 @@
 namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 
 use Illuminate\Console\Command;
-use Lloricode\Paymaya\Client\Checkout\WebhookClient;
-use Lloricode\Paymaya\PaymayaClient;
+use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 
 class RetrieveWebhookCommand extends Command
 {
     public $signature = 'paymaya-sdk:webhook:retrieve';
 
     public $description = 'Retrieve registered webhooks';
-
-    private PaymayaClient $paymayaClient;
-
-    public function __construct(PaymayaClient $paymayaClient)
-    {
-        parent::__construct();
-        $this->paymayaClient = $paymayaClient;
-    }
 
     /**
      * @return void
@@ -40,10 +31,7 @@ class RetrieveWebhookCommand extends Command
     {
         $return = [];
 
-        foreach (
-            (new WebhookClient($this->paymayaClient))
-                ->retrieve() as $webhookResponse
-        ) {
+        foreach (PaymayaFacade::webhook()->retrieve() as $webhookResponse) {
             $return[] = [
                 $webhookResponse->id,
                 $webhookResponse->name,
