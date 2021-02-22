@@ -74,6 +74,7 @@ use Lloricode\Paymaya\Request\Checkout\Item;
 use Lloricode\Paymaya\Request\Checkout\MetaData;
 use Lloricode\Paymaya\Request\Checkout\RedirectUrl;
 use Lloricode\Paymaya\Request\Checkout\TotalAmount;
+use PaymayaSDK;
 
 $checkout = (new Checkout())
     ->setTotalAmount(
@@ -169,7 +170,7 @@ $checkout = (new Checkout())
             ->setMST('mst')
     );
 
-$checkoutResponse = \PaymayaFacade::checkout()->execute($checkout);
+$checkoutResponse = PaymayaSDK::checkout()->execute($checkout);
 
 echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
