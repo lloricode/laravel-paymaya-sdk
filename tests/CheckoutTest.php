@@ -8,9 +8,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
-use Lloricode\LaravelPaymaya\Facades\CheckoutFacade;
-use Lloricode\LaravelPaymaya\Facades\ClientFacade;
-use Lloricode\Paymaya\Response\Checkout\CheckoutResponse;
+use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Test\TestHelper;
 
 class CheckoutTest extends TestCase
@@ -42,11 +40,11 @@ class CheckoutTest extends TestCase
             $mock
         );
 
-        ClientFacade::setHandlerStack($handlerStack);
+        PaymayaFacade::client()->setHandlerStack($handlerStack);
 
         try {
-            /** @var CheckoutResponse $checkoutResponse */
-            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
+            $checkoutResponse = PaymayaFacade::checkout()->execute(TestHelper::buildCheckout());
+//            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
         } catch (ErrorException $e) {
             $this->fail('ErrorException');
         } catch (ClientException $e) {

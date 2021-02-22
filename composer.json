@@ -55,7 +55,8 @@
             ],
             "aliases": {
                 "PaymayaClient": "Lloricode\\LaravelPaymaya\\Facades\\ClientFacade",
-                "PaymayaCheckoutClient": "Lloricode\\LaravelPaymaya\\Facades\\CheckoutFacade"
+                "PaymayaCheckoutClient": "Lloricode\\LaravelPaymaya\\Facades\\CheckoutFacade",
+                "PaymayaSDK": "Lloricode\\LaravelPaymaya\\Facades\\PaymayaFacade"
             }
         }
     },
