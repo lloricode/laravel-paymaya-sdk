@@ -169,7 +169,7 @@ $checkout = (new Checkout())
             ->setMST('mst')
     );
 
-$checkoutResponse = \PaymayaSDKCheckoutClient::execute($checkout);
+$checkoutResponse = \PaymayaCheckoutClient::execute($checkout);
 
 echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
