@@ -5,7 +5,7 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 use Illuminate\Console\Command;
 use Lloricode\Paymaya\Client\Checkout\WebhookClient;
 use Lloricode\Paymaya\PaymayaClient;
-use Lloricode\Paymaya\Request\Checkout\WebhookRequest;
+use Lloricode\Paymaya\Request\Checkout\Webhook;
 
 class RegisterWebHookCommand extends Command
 {
@@ -33,7 +33,7 @@ class RegisterWebHookCommand extends Command
         foreach (config('paymaya-sdk.webhooks') as $name => $url) {
             (new WebhookClient($this->paymayaClient))
                 ->register(
-                    WebhookRequest::new()
+                    (new Webhook())
                         ->setName($name)
                         ->setCallbackUrl(url($url))
                 );

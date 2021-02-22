@@ -7,7 +7,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\ClientFacade;
 use Lloricode\LaravelPaymaya\Tests\TestCase;
-use Lloricode\Paymaya\Request\Checkout\WebhookRequest;
+use Lloricode\Paymaya\Request\Checkout\Webhook;
 
 class WebhookCommandTest extends TestCase
 {
@@ -64,7 +64,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => WebhookRequest::SUCCESS,
+                                    'name' => Webhook::SUCCESS,
                                     'id' => 'test-generated-id1',
                                 ]
                             ),
@@ -76,7 +76,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => WebhookRequest::SUCCESS,
+                                    'name' => Webhook::SUCCESS,
                                     'id' => 'test-generated-id1',
                                 ]
                             ),
@@ -88,7 +88,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => WebhookRequest::FAILURE,
+                                    'name' => Webhook::FAILURE,
                                     'id' => 'test-generated-id2',
                                 ]
                             ),
@@ -100,7 +100,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => WebhookRequest::DROPOUT,
+                                    'name' => Webhook::DROPOUT,
                                     'id' => 'test-generated-id3',
                                 ]
                             ),

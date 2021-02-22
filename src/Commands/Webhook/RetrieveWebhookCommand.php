@@ -45,11 +45,11 @@ class RetrieveWebhookCommand extends Command
                 ->retrieve() as $webhookResponse
         ) {
             $return[] = [
-                $webhookResponse->getId(),
-                $webhookResponse->getName(),
-                $webhookResponse->getCallbackUrl(),
-                $webhookResponse->getCreatedAt(),
-                $webhookResponse->getUpdatedAt(),
+                $webhookResponse->id,
+                $webhookResponse->name,
+                $webhookResponse->callbackUrl,
+                $webhookResponse->createdAt,
+                $webhookResponse->updatedAt,
             ];
         }
 

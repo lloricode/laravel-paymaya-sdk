@@ -10,6 +10,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\CheckoutFacade;
 use Lloricode\LaravelPaymaya\Facades\ClientFacade;
+use Lloricode\Paymaya\Response\Checkout\CheckoutResponse;
 use Lloricode\Paymaya\Test\TestHelper;
 
 class CheckoutTest extends TestCase
@@ -44,6 +45,7 @@ class CheckoutTest extends TestCase
         ClientFacade::setHandlerStack($handlerStack);
 
         try {
+            /** @var CheckoutResponse $checkoutResponse */
             $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
         } catch (ErrorException $e) {
             $this->fail('ErrorException');
@@ -53,7 +55,7 @@ class CheckoutTest extends TestCase
             $this->fail('GuzzleException');
         }
 
-        $this->assertEquals($id, $checkoutResponse->getId());
-        $this->assertEquals($url, $checkoutResponse->getUrl());
+        $this->assertEquals($id, $checkoutResponse->checkoutId);
+        $this->assertEquals($url, $checkoutResponse->redirectUrl);
     }
 }

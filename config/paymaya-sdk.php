@@ -1,7 +1,7 @@
 <?php
 
 use Lloricode\Paymaya\PaymayaClient;
-use Lloricode\Paymaya\Request\Checkout\WebhookRequest;
+use Lloricode\Paymaya\Request\Checkout\Webhook;
 
 return [
     'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
@@ -16,8 +16,8 @@ return [
      *
      */
     'webhooks' => [
-        WebhookRequest::SUCCESS => 'api/payment-callback/paymaya/success',
-        WebhookRequest::FAILURE => 'api/payment-callback/paymaya/failure',
-        WebhookRequest::DROPOUT => 'api/payment-callback/paymaya/dropout',
+        Webhook::SUCCESS => 'api/payment-callback/paymaya/success',
+        Webhook::FAILURE => 'api/payment-callback/paymaya/failure',
+        Webhook::DROPOUT => 'api/payment-callback/paymaya/dropout',
     ],
 ];
