@@ -181,12 +181,17 @@ echo 'url: '.$checkoutResponse->redirectUrl."\n";
 ```
 # see config `paymaya-sdk.webhooks` array to set your webhooks,
 # then run this to register webhooks.
+
 php artisan paymaya-sdk:webhook:register
 
+
 # retrieve webhooks
+
 php artisan paymaya-sdk:webhook:retrieve
 
+
 # retrieve output
+
 +--------+------------------+------------------------------+---------------------+---------------------+
 | id     | name             | callbackUrl                  | createdAt           | updatedAt           |
 +--------+------------------+------------------------------+---------------------+---------------------+
