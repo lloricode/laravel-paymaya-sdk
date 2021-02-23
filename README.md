@@ -9,7 +9,7 @@ Paymaya SDK for laravel, it uses [paymaya-sdk-php](https://github.com/lloricode/
 - [Installation](#installation)
 - [Usage](#usage)
     - [Checkout](#checkout)
-    - [Webhooks Checkout](#checkout-webhook)
+    - [Webhooks](#webhook)
 
 ## Installation
 
@@ -176,7 +176,7 @@ echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
 ```
 
-### Checkout Webhook
+### Webhook
 
 ```
 # see config `paymaya-sdk.webhooks` array to set your webhooks,
