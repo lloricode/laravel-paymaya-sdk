@@ -4,7 +4,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lloricode/laravel-paymaya-sdk/Tests?label=tests)](https://github.com/lloricode/laravel-paymaya-sdk/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/lloricode/laravel-paymaya-sdk.svg?style=flat-square)](https://packagist.org/packages/lloricode/laravel-paymaya-sdk)
 
-Paymaya SDK for laravel, it uses [paymaya-sdk-php](https://github.com/lloricode/paymaya-sdk-php).
+Paymaya SDK for laravel, it uses [lloricode/paymaya-sdk-php](https://github.com/lloricode/paymaya-sdk-php).
 
 - [Installation](#installation)
 - [Usage](#usage)
