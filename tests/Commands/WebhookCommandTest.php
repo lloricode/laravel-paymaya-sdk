@@ -64,7 +64,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => Webhook::SUCCESS,
+                                    'name' => Webhook::CHECKOUT_SUCCESS,
                                     'id' => 'test-generated-id1',
                                 ]
                             ),
@@ -76,7 +76,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => Webhook::SUCCESS,
+                                    'name' => Webhook::CHECKOUT_SUCCESS,
                                     'id' => 'test-generated-id1',
                                 ]
                             ),
@@ -88,7 +88,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => Webhook::FAILURE,
+                                    'name' => Webhook::CHECKOUT_FAILURE,
                                     'id' => 'test-generated-id2',
                                 ]
                             ),
@@ -100,7 +100,7 @@ class WebhookCommandTest extends TestCase
                         json_encode(
                             self::sampleWebhookData(
                                 [
-                                    'name' => Webhook::DROPOUT,
+                                    'name' => Webhook::CHECKOUT_DROPOUT,
                                     'id' => 'test-generated-id3',
                                 ]
                             ),
