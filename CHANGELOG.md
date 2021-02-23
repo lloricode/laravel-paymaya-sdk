@@ -4,7 +4,9 @@ All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
 ## 0.2.0 - 2021-02-23
 
-- Use lloricode/paymaya-sdk-php ^0.3.0
+- Add main facade manager
+- Add facade for webhook
+- Fix deprecate for lloricode/paymaya-sdk-php ^0.3.0
 
 ## 0.1.2 - 2021-02-08
 
