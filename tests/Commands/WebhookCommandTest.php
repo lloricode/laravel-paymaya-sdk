@@ -7,7 +7,7 @@ use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\LaravelPaymaya\Tests\TestCase;
-use Lloricode\Paymaya\Request\Checkout\Webhook;
+use Lloricode\Paymaya\Request\Webhook\Webhook;
 
 class WebhookCommandTest extends TestCase
 {

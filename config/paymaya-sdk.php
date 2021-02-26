@@ -1,7 +1,7 @@
 <?php
 
 use Lloricode\Paymaya\PaymayaClient;
-use Lloricode\Paymaya\Request\Checkout\Webhook;
+use Lloricode\Paymaya\Request\Webhook\Webhook;
 
 return [
     'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),

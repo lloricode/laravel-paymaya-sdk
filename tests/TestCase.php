@@ -3,7 +3,7 @@
 namespace Lloricode\LaravelPaymaya\Tests;
 
 use Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider;
-use Lloricode\Paymaya\Request\Checkout\Webhook;
+use Lloricode\Paymaya\Request\Webhook\Webhook;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

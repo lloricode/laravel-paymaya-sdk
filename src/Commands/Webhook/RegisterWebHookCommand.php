@@ -4,7 +4,7 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\Paymaya\Request\Checkout\Webhook;
+use Lloricode\Paymaya\Request\Webhook\Webhook;
 
 class RegisterWebHookCommand extends Command
 {

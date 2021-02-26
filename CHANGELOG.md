@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.1 - 2021-0X-XX
+
+- Add customization register and retrieve command (todo)
+
+## 0.3.0 - 2021-02-23
+
+- Use and fix deprecate for lloricode/paymaya-sdk-php ^0.4.0
+
 ## 0.2.0 - 2021-02-23
 
 - Add main facade manager
