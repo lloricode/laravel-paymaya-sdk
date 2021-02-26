@@ -6,7 +6,7 @@ All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
 - Add customization register and retrieve command (todo)
 
-## 0.3.0 - 2021-02-23
+## 0.3.0 - 2021-02-26
 
 - Use and fix deprecate for lloricode/paymaya-sdk-php ^0.4.0
 
