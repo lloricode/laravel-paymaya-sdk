@@ -30,6 +30,7 @@ class RegisterCustomizationCommand extends Command
                 $this->error('Missing/invalid parameters.');
                 $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
             }
+
             return 1;
         }
     }
