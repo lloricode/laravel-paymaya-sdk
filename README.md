@@ -3,6 +3,7 @@
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lloricode/laravel-paymaya-sdk.svg?style=flat-square)](https://packagist.org/packages/lloricode/laravel-paymaya-sdk)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/lloricode/laravel-paymaya-sdk/Tests?label=tests)](https://github.com/lloricode/laravel-paymaya-sdk/actions?query=workflow%3ATests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/lloricode/laravel-paymaya-sdk.svg?style=flat-square)](https://packagist.org/packages/lloricode/laravel-paymaya-sdk)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=V8PYXUNG6QP44)
 
 Paymaya SDK for laravel, it uses [lloricode/paymaya-sdk-php](https://github.com/lloricode/paymaya-sdk-php).
 
@@ -31,7 +32,7 @@ This is the contents of the published config file:
 <?php
 
 use Lloricode\Paymaya\PaymayaClient;
-use Lloricode\Paymaya\Request\Checkout\Webhook;
+use Lloricode\Paymaya\Request\Webhook\Webhook;
 
 return [
     'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
@@ -49,6 +50,20 @@ return [
         Webhook::CHECKOUT_SUCCESS => 'api/payment-callback/paymaya/success',
         Webhook::CHECKOUT_FAILURE => 'api/payment-callback/paymaya/failure',
         Webhook::CHECKOUT_DROPOUT => 'api/payment-callback/paymaya/dropout',
+
+//        Webhook::PAYMENT_SUCCESS => 'api/test/success',
+//        Webhook::PAYMENT_EXPIRED => 'api/test/expired',
+//        Webhook::PAYMENT_FAILED => 'api/test/failed',
+    ],
+
+    'checkout' => [
+        'customization' => [
+            'logoUrl' => 'https://image1.png',
+            'iconUrl' => 'https://image2.png',
+            'appleTouchIconUrl' => 'https://image3.png',
+            'customTitle' => 'test paymaya sandbox title',
+            'colorScheme' => '#e01c44',
+        ],
     ],
 ];
 ```
