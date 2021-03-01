@@ -2,6 +2,7 @@
 
 namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
+use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Request\Checkout\Customization\Customization;
@@ -13,15 +14,23 @@ class RegisterCustomizationCommand extends Command
     public $description = 'Register customization';
 
     /**
-     * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
-     *
      */
-    public function handle(): void
+    public function handle()
     {
-        PaymayaFacade::customization()
-            ->register(new Customization(config('paymaya-sdk.checkout.customization')));
+        try {
+            PaymayaFacade::customization()
+                ->register(new Customization(config('paymaya-sdk.checkout.customization')));
 
-        $this->info('Done Registering customization');
+            $this->info('Done Registering customization');
+        } catch (ClientException $exception) {
+            $response = (array)json_decode((string)$exception->getResponse()->getBody(), true);
+
+            if (in_array($response['message'] ?: null, ['Missing/invalid parameters.'])) {
+                $this->error('Missing/invalid parameters.');
+                $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
+            }
+            return 1;
+        }
     }
 }

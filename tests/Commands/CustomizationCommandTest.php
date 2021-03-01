@@ -43,8 +43,14 @@ class CustomizationCommandTest extends TestCase
 
         PaymayaFacade::client()->setHandlerStack($handlerStack);
 
+        $rows = [];
+
+        foreach ($data as $field => $value) {
+            $rows[] = [$field, is_bool($value) ? ($value ? 'true' : 'false') : $value];
+        }
+
         $this->artisan('paymaya-sdk:customization:retrieve')
-            ->expectsTable(array_keys($data), [$data])
+            ->expectsTable(['Field', 'Value'], $rows)
             ->assertExitCode(0);
     }
 
@@ -90,5 +96,63 @@ class CustomizationCommandTest extends TestCase
 
         // TODO: missing response but working ok
 //        $this->assertEquals(json_encode($data), $response->getBody()->getContents());
+    }
+
+    /**
+     * @test
+     */
+    public function handle_invalid_parameter()
+    {
+        $data = [
+            'logoUrl' => 'http://image1',
+            'iconUrl' => 'http://image2',
+            'appleTouchIconUrl' => 'http://image3',
+            'customTitle' => 'test title',
+            'colorScheme' => '1234',
+        ];
+
+        config(['paymaya-sdk.checkout.customization' => $data]);
+
+        $responseError = '{
+    "code": "2553",
+    "message": "Missing\/invalid parameters.",
+    "parameters": [
+        {
+            "field": "logoUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        },
+        {
+            "field": "iconUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        },
+        {
+            "field": "appleTouchIconUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        }
+    ]
+}';
+
+        $handlerStack = HandlerStack::create(
+            new MockHandler(
+                [
+                    new Response(
+                        400,
+                        [],
+                        $responseError,
+                    ),
+                ]
+            )
+        );
+
+        $history = [];
+
+        $errorArray = (array)json_decode($responseError, true);
+
+        PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
+
+        $this->artisan('paymaya-sdk:customization:register')
+            ->expectsOutput('Missing/invalid parameters.')
+            ->expectsOutput(json_encode($errorArray['parameters'], JSON_PRETTY_PRINT))
+            ->assertExitCode(1);
     }
 }

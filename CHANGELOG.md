@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.2 - 2021-03-01
+
+- Handle customization validation error
+
 ## 0.3.1 - 2021-03-01
 
 - Add customization register and retrieve command

@@ -20,6 +20,12 @@ class RetrieveCustomizationCommand extends Command
     {
         $data = PaymayaFacade::customization()->retrieve()->toArray();
 
-        $this->table(array_keys($data), [$data]);
+        $rows = [];
+
+        foreach ($data as $field => $value) {
+            $rows[] = [$field, is_bool($value) ? ($value ? 'true' : 'false') : $value];
+        }
+
+        $this->table(['Field', 'Value'], $rows);
     }
 }
