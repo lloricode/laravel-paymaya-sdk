@@ -31,7 +31,8 @@ return [
             'iconUrl' => 'https://image2.png',
             'appleTouchIconUrl' => 'https://image3.png',
             'customTitle' => 'test paymaya sandbox title',
-            'colorScheme' => '#e01c44',
+            'colorScheme' => '#e01c44',            
+            'redirectTimer'=> 3,
         ],
     ],
 ];
