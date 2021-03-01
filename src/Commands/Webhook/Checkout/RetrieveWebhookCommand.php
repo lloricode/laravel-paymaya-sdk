@@ -1,6 +1,6 @@
 <?php
 
-namespace Lloricode\LaravelPaymaya\Commands\Webhook;
+namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
@@ -18,9 +18,7 @@ class RetrieveWebhookCommand extends Command
      */
     public function handle(): void
     {
-        $webHooks = $this->retrieveWebhooks();
-
-        $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $webHooks);
+        $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $this->retrieveWebhooks());
     }
 
     /**
@@ -32,12 +30,13 @@ class RetrieveWebhookCommand extends Command
         $return = [];
 
         foreach (PaymayaFacade::webhook()->retrieve() as $webhookResponse) {
+
             $return[] = [
-                $webhookResponse->id,
-                $webhookResponse->name,
-                $webhookResponse->callbackUrl,
-                $webhookResponse->createdAt,
-                $webhookResponse->updatedAt,
+                'id' => $webhookResponse->id,
+                'name' => $webhookResponse->name,
+                'callbackUrl' => $webhookResponse->callbackUrl,
+                'createdAt' => $webhookResponse->createdAt->toString(),
+                'updatedAt' => $webhookResponse->updatedAt->toString(),
             ];
         }
 

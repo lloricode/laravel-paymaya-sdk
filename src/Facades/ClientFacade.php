@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Facade;
 use Lloricode\Paymaya\PaymayaClient;
 
 /**
- * @mixin PaymayaClient
+ * @mixin \Lloricode\Paymaya\PaymayaClient
  */
 class ClientFacade extends Facade
 {

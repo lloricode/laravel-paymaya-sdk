@@ -4,7 +4,7 @@ All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
 ## 0.3.1 - 2021-0X-XX
 
-- Add customization register and retrieve command (todo)
+- Add customization register and retrieve command
 
 ## 0.3.0 - 2021-02-26
 

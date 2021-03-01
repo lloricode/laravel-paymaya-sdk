@@ -1,6 +1,6 @@
 <?php
 
-namespace Lloricode\LaravelPaymaya\Commands\Webhook;
+namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;

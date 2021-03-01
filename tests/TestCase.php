@@ -11,11 +11,11 @@ class TestCase extends Orchestra
     protected static function sampleWebhookData(array $override = []): array
     {
         return $override + [
-                'name' => Webhook::CHECKOUT_SUCCESS,
                 'id' => 'test-generated-id',
+                'name' => Webhook::CHECKOUT_SUCCESS,
                 'callbackUrl' => 'https://web.test/test/success',
-                'createdAt' => '2020-01-05T02:30:57.000Z',
-                'updatedAt' => '2021-02-05T02:30:57.000Z',
+                'createdAt' => 'Sun Jan 05 2020 02:30:57 GMT+0000',
+                'updatedAt' => 'Sun Jan 05 2020 02:30:57 GMT+0000',
             ];
     }
 

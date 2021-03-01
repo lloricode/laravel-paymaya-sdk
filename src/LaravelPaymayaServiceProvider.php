@@ -2,8 +2,10 @@
 
 namespace Lloricode\LaravelPaymaya;
 
-use Lloricode\LaravelPaymaya\Commands\Webhook\RegisterWebHookCommand;
-use Lloricode\LaravelPaymaya\Commands\Webhook\RetrieveWebhookCommand;
+use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
+use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RegisterWebHookCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RetrieveWebhookCommand;
 use Lloricode\Paymaya\PaymayaClient;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -19,6 +21,8 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
                 [
                     RetrieveWebhookCommand::class,
                     RegisterWebHookCommand::class,
+                    RegisterCustomizationCommand::class,
+                    RetrieveCustomizationCommand::class,
                 ]
             );
     }
