@@ -27,9 +27,9 @@ return [
 
     'checkout' => [
         'customization' => [
-            'logoUrl' => 'http://testimge1',
-            'iconUrl' => 'http://testimge1',
-            'appleTouchIconUrl' => 'http://testimge1',
+            'logoUrl' => 'https://image.png',
+            'iconUrl' => 'https://image.png',
+            'appleTouchIconUrl' => 'https://image.png',
             'customTitle' => 'test paymaya sandbox title',
             'colorScheme' => '#e01c44',
         ],
