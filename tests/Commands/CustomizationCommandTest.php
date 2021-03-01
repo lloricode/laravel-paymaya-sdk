@@ -48,7 +48,6 @@ class CustomizationCommandTest extends TestCase
             ->assertExitCode(0);
     }
 
-
     /** @test */
     public function register_data()
     {

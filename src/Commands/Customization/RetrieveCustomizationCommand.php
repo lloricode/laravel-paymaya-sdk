@@ -11,7 +11,6 @@ class RetrieveCustomizationCommand extends Command
 
     public $description = 'Retrieve registered customization';
 
-
     /**
      * @return void
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -23,5 +22,4 @@ class RetrieveCustomizationCommand extends Command
 
         $this->table(array_keys($data), [$data]);
     }
-
 }

@@ -30,7 +30,6 @@ class RetrieveWebhookCommand extends Command
         $return = [];
 
         foreach (PaymayaFacade::webhook()->retrieve() as $webhookResponse) {
-
             $return[] = [
                 'id' => $webhookResponse->id,
                 'name' => $webhookResponse->name,

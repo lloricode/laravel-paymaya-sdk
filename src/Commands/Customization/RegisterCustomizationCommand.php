@@ -8,7 +8,6 @@ use Lloricode\Paymaya\Request\Checkout\Customization\Customization;
 
 class RegisterCustomizationCommand extends Command
 {
-
     public $signature = 'paymaya-sdk:customization:register';
 
     public $description = 'Register customization';
