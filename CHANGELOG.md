@@ -2,9 +2,15 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.X - 2021-0X-XX
+
+- Add missing facade alias
+
 ## 0.3.4 - 2021-03-01
 
-- Fix test console expectsTable with minimum `laravel/framework:^8.22`, see [v8.22 changelog](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8220-2021-01-12) and [laravel PR #35820](https://github.com/laravel/framework/pull/35820).
+- Fix test console expectsTable with minimum `laravel/framework:^8.22`,
+  see [v8.22 changelog](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8220-2021-01-12)
+  and [laravel PR #35820](https://github.com/laravel/framework/pull/35820).
 - Set minimum version lloricode/paymaya-sdk-php ^0.4.1
 
 ## 0.3.3 - 2021-03-01
