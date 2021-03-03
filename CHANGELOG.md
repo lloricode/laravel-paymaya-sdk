@@ -5,7 +5,7 @@ All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 ## 0.3.X - 2021-0X-XX
 
 - Add missing facade alias
-- Add support to laravel ^7.0 and ^8.0
+- Add support for laravel ^7.0 and ^8.0
 
 ## 0.3.4 - 2021-03-01
 
