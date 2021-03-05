@@ -113,7 +113,7 @@ class WebhookCommandTest extends TestCase
         PaymayaFacade::client()->setHandlerStack($handlerStack);
 
         $this->artisan('paymaya-sdk:webhook:register')
-            ->expectsOutput('Done Registering webhooks')
+            ->expectsOutput('Done registering webhooks')
             ->assertExitCode(0);
     }
 }

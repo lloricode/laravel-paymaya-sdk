@@ -30,6 +30,6 @@ class RegisterWebHookCommand extends Command
                 );
         }
 
-        $this->info('Done Registering webhooks');
+        $this->info('Done registering webhooks');
     }
 }

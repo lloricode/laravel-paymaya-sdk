@@ -85,7 +85,7 @@ class CustomizationCommandTest extends TestCase
         PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
         $this->artisan('paymaya-sdk:customization:register')
-            ->expectsOutput('Done Registering customization')
+            ->expectsOutput('Done registering customization')
             ->assertExitCode(0);
 
         $this->assertCount(1, $history);
@@ -155,5 +155,36 @@ class CustomizationCommandTest extends TestCase
             ->expectsOutput('Missing/invalid parameters.')
             ->expectsOutput(json_encode($errorArray['parameters'], JSON_PRETTY_PRINT))
             ->assertExitCode(1);
+    }
+
+    /**
+     * @test
+     */
+    public function delete_data()
+    {
+        $handlerStack = HandlerStack::create(
+            new MockHandler(
+                [
+                    new Response(
+                        204
+                    ),
+                ]
+            )
+        );
+
+        $history = [];
+
+        PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
+
+        $this->artisan('paymaya-sdk:customization:delete')
+            ->expectsOutput('Done deleting customization')
+            ->assertExitCode(0);
+
+
+        /** @var \GuzzleHttp\Psr7\Response $response */
+        $response = $history[0]['response'];
+
+        $this->assertCount(1, $history);
+        $this->assertEquals(204, $response->getStatusCode());
     }
 }

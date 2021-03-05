@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.6 - 2021-03-05
+
+- Add delete customization command
+- Set minimum version lloricode/paymaya-sdk-php ^0.4.2
+
 ## 0.3.5 - 2021-03-03
 
 - Add missing facade alias

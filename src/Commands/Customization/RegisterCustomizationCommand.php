@@ -22,7 +22,7 @@ class RegisterCustomizationCommand extends Command
             PaymayaFacade::customization()
                 ->register(new Customization(config('paymaya-sdk.checkout.customization')));
 
-            $this->info('Done Registering customization');
+            $this->info('Done registering customization');
         } catch (ClientException $exception) {
             $response = (array)json_decode((string)$exception->getResponse()->getBody(), true);
 

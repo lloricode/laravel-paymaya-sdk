@@ -2,6 +2,7 @@
 
 namespace Lloricode\LaravelPaymaya;
 
+use Lloricode\LaravelPaymaya\Commands\Customization\DeleteCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RegisterWebHookCommand;
@@ -23,6 +24,7 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
                     RegisterWebHookCommand::class,
                     RegisterCustomizationCommand::class,
                     RetrieveCustomizationCommand::class,
+                    DeleteCustomizationCommand::class,
                 ]
             );
     }
