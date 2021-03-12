@@ -13,6 +13,7 @@ Paymaya SDK for laravel, it uses [lloricode/paymaya-sdk-php](https://github.com/
 - [Usage](#usage)
     - [Checkout](#checkout)
     - [Webhooks](#webhook)
+    - [Testing with Guzzle Mock](#testing-with-guzzle-mock)
 
 ## Installation
 
@@ -219,6 +220,66 @@ php artisan paymaya-sdk:webhook:retrieve
 +--------+------------------+------------------------------+---------------------+---------------------+
 
 ```
+
+### Testing with Guzzle Mock
+
+Add this to your Base Test Case
+
+```php
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Psr7\Response;
+use PaymayaSDK;
+    
+    protected function fakePaymaya(array $mockResponse, &$history = [])
+    {
+        $mock = [];
+
+        foreach ($mockResponse as $value) {
+            $mock[] = new Response(
+                $value['status'] ?? 200,
+                $value['headers'] ?? [],
+                $value['body'] ?? [],
+            );
+        }
+
+        PaymayaSDK::client()->setHandlerStack(
+            HandlerStack::create(new MockHandler($mock)),
+            $history
+        );
+    }
+```
+
+Sample usage of mock
+
+```php
+
+    /**
+     * @test
+     */
+    public function success_checkout() 
+    {
+            $paymayaID = 'test-paymaya-generated-id';
+            $paymayaRedirectUrl = 'http://test-paymaya/redirect-url';
+
+            $this->fakePaymaya(
+                [
+                    [
+                        'body' => json_encode(
+                            [
+                                'checkoutId' => $paymayaID,
+                                'redirectUrl' => $paymayaRedirectUrl,
+                            ]
+                        ),
+                    ],
+                ]
+            );
+            
+           // you test
+           
+
+```
+
 
 ## Testing
 
