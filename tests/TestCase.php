@@ -8,6 +8,19 @@ use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        config(
+            [
+                'paymaya-sdk.keys' => [
+                    'public' => 'public-xxx',
+                    'secret' => 'secret-xxx',
+                ],
+            ]
+        );
+    }
+
     protected static function sampleWebhookData(array $override = []): array
     {
         return $override + [

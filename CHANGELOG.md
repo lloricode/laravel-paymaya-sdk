@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.7 - 2021-03-18
+
+- Enhance Paymaya Client call
+
 ## 0.3.6 - 2021-03-05
 
 - Add delete customization command
