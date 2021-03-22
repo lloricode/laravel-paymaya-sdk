@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
+## 0.3.X - 2021-XX-XX
+
+- Manage Exception using laravel logs, allow set config log files
+
 ## 0.3.7 - 2021-03-18
 
 - Enhance Paymaya Client call
