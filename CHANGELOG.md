@@ -2,9 +2,14 @@
 
 All notable changes to `laravel-paymaya-sdk` will be documented in this file.
 
-## 0.3.X - 2021-XX-XX
+## 0.4.X - 2021-XX-XX
 
 - Manage Exception using laravel logs, allow set config log files
+
+## 0.4.0-alpha - 2021-05-17
+
+- Drop support for php 7
+- Use lloricode/paymaya-sdk-php 0.5.0-alpha
 
 ## 0.3.7 - 2021-03-18
 
