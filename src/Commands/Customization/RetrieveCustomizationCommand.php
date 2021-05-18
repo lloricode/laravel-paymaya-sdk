@@ -13,7 +13,7 @@ class RetrieveCustomizationCommand extends Command
 
     /**
      * @return void
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties
      *
      */
     public function handle(): void

@@ -14,7 +14,7 @@ class RegisterCustomizationCommand extends Command
     public $description = 'Register customization';
 
     /**
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties
      */
     public function handle()
     {
