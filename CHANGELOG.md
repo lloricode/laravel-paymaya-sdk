@@ -6,6 +6,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- Add composer-runtime-api:^2.0 in require --dev, to enforce use composer v2 in development.
+
 - Add phly/keep-a-changelog in require --dev.
 
 ### Changed

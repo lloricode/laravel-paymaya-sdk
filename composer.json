@@ -25,6 +25,7 @@
         "spatie/laravel-package-tools": "^1.1"
     },
     "require-dev": {
+        "composer-runtime-api": "^2.0",
         "orchestra/testbench": "^5.0|^6.0",
         "phly/keep-a-changelog": "^2.11",
         "phpunit/phpunit": "^9.3",
