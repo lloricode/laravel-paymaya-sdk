@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- Set Minimum lloricode/paymaya-sdk-php:^v0.5.0-alpha3.
+
 - Move todo from changelog to config file.
 
 - Update changelog format.
