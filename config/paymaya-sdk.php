@@ -3,6 +3,10 @@
 use Lloricode\Paymaya\PaymayaClient;
 use Lloricode\Paymaya\Request\Webhook\Webhook;
 
+/**
+ * @todo: Manage Exception using laravel logs, allow set config log files
+ */
+
 return [
     'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
     'keys' => [

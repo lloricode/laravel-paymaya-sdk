@@ -1,67 +1,321 @@
 # Changelog
 
-All notable changes to `laravel-paymaya-sdk` will be documented in this file.
+All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 0.4.X - 2021-XX-XX
+## Unreleased - TBD
 
-- Manage Exception using laravel logs, allow set config log files
+### Added
+
+- Add phly/keep-a-changelog in require --dev.
+
+### Changed
+
+- Move todo from changelog to config file.
+
+- Update changelog format.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.4.0-alpha - 2021-05-17
 
-- Drop support for php 7
-- Use lloricode/paymaya-sdk-php 0.5.0-alpha
+### Added
+
+- Nothing.
+
+### Changed
+
+- Use lloricode/paymaya-sdk-php 0.5.0-alpha.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Drop support for php 7.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.7 - 2021-03-18
 
-- Enhance Paymaya Client call
+### Added
+
+- Nothing.
+
+### Changed
+
+- Enhance Paymaya Client call.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.6 - 2021-03-05
 
-- Add delete customization command
-- Set minimum version lloricode/paymaya-sdk-php ^0.4.2
+### Added
+
+- Add delete customization command.
+
+### Changed
+
+- Set minimum version lloricode/paymaya-sdk-php ^0.4.2.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.5 - 2021-03-03
 
-- Add missing facade alias
-- Add support for laravel ^7.0
+### Added
+
+- Add missing facade alias.
+
+- Add support for laravel ^7.0.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.4 - 2021-03-01
 
+### Added
+
+- Nothing.
+
+### Changed
+
 - Fix test console expectsTable with minimum `laravel/framework:^8.22`,
   see [v8.22 changelog](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8220-2021-01-12)
-  and [laravel PR #35820](https://github.com/laravel/framework/pull/35820).
-- Set minimum version lloricode/paymaya-sdk-php ^0.4.1
+  and [laravel PR #35820](https://github.com/laravel/framework/pull/35820)..
+
+- Set minimum version lloricode/paymaya-sdk-php ^0.4.1.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.3 - 2021-03-01
 
-- Update readme
+### Added
+
+- Nothing.
+
+### Changed
+
+- Update readme.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.2 - 2021-03-01
 
-- Handle customization validation error
+### Added
+
+- Nothing.
+
+### Changed
+
+- Handle customization validation error.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.1 - 2021-03-01
 
-- Add customization register and retrieve command
+### Added
+
+- Add customization register and retrieve command.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.3.0 - 2021-02-26
 
-- Use and fix deprecate for lloricode/paymaya-sdk-php ^0.4.0
+### Added
+
+- Nothing.
+
+### Changed
+
+- Use and fix deprecate for lloricode/paymaya-sdk-php ^0.4.0.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.2.0 - 2021-02-23
 
-- Add main facade manager
-- Add facade for webhook
-- Fix deprecate for lloricode/paymaya-sdk-php ^0.3.0
+### Added
+
+- Add main facade manager.
+
+- Add facade for webhook.
+
+### Changed
+
+- Fix deprecate for lloricode/paymaya-sdk-php ^0.3.0.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.1.2 - 2021-02-08
 
-- Fix access config in production server
+### Added
+
+- Nothing.
+
+### Changed
+
+- Fix access config in production server.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
 
 ## 0.1.1 - 2021-02-08
 
-- Remove url() in config
+### Added
+
+- Nothing.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Remove url() in config.
+
+### Fixed
+
+- Nothing.
 
 ## 0.1.0 - 2021-02-08
 
-- initial release
+### Added
+
+- Initial release.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
