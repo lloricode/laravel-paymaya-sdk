@@ -29,17 +29,16 @@ class WebhookCommandTest extends TestCase
         PaymayaFacade::client()->setHandlerStack($handlerStack);
 
         $this->artisan('paymaya-sdk:webhook:retrieve')
-            // TODO: add test
-//            ->expectsTable(
-//                [
-//                    'id',
-//                    'name',
-//                    'callbackUrl',
-//                    'createdAt',
-//                    'updatedAt',
-//                ],
-//                [self::sampleWebhookData()]
-//            )
+            ->expectsTable(
+                [
+                    'id',
+                    'name',
+                    'callbackUrl',
+                    'createdAt',
+                    'updatedAt',
+                ],
+                [self::sampleWebhookData()]
+            )
             ->assertExitCode(0);
     }
 
