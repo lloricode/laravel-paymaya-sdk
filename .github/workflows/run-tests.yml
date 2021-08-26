@@ -42,4 +42,4 @@ jobs:
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute pest
-        run: vendor/bin/pest
+        run: vendor/bin/pest --coverage
