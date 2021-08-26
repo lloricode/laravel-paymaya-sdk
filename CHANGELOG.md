@@ -6,11 +6,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
+- Add config ray for phpunit.
+
 - Add test rows for consoles.
 
 ### Changed
 
-- Nothing.
+- Set minimum to latest spatie laravel ray 1.24.2
 
 ### Deprecated
 
