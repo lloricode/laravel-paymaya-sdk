@@ -12,6 +12,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
+- Use pestphp for testing.
+
 - Set minimum to latest spatie laravel ray 1.24.2
 
 ### Deprecated

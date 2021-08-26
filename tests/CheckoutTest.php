@@ -11,13 +11,10 @@ use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Test\TestHelper;
 
-class CheckoutTest extends TestCase
-{
-    /**
-     * @test
-     */
-    public function success()
-    {
+use function PHPUnit\Framework\assertEquals;
+
+it('success checkout',
+    function () {
         $id = 'test-generated-id';
         $url = 'http://test';
 
@@ -53,7 +50,7 @@ class CheckoutTest extends TestCase
             $this->fail('GuzzleException');
         }
 
-        $this->assertEquals($id, $checkoutResponse->checkoutId);
-        $this->assertEquals($url, $checkoutResponse->redirectUrl);
+        assertEquals($id, $checkoutResponse->checkoutId);
+        assertEquals($url, $checkoutResponse->redirectUrl);
     }
-}
+);

@@ -6,45 +6,42 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\LaravelPaymaya\Tests\TestCase;
 use Lloricode\Paymaya\Request\Webhook\Webhook;
 
-class WebhookCommandTest extends TestCase
-{
-    /** @test */
-    public function retrieve_data()
-    {
-        $handlerStack = HandlerStack::create(
-            new MockHandler(
-                [
-                    new Response(
-                        200,
-                        [],
-                        json_encode([self::sampleWebhookData()]),
-                    ),
-                ]
-            )
-        );
+use function Pest\Laravel\artisan;
 
-        PaymayaFacade::client()->setHandlerStack($handlerStack);
+it('retrieve data', function () {
+    $handlerStack = HandlerStack::create(
+        new MockHandler(
+            [
+                new Response(
+                    200,
+                    [],
+                    json_encode([self::sampleWebhookData()]),
+                ),
+            ]
+        )
+    );
 
-        $this->artisan('paymaya-sdk:webhook:retrieve')
-            ->expectsTable(
-                [
-                    'id',
-                    'name',
-                    'callbackUrl',
-                    'createdAt',
-                    'updatedAt',
-                ],
-                [self::sampleWebhookData()]
-            )
-            ->assertExitCode(0);
-    }
+    PaymayaFacade::client()->setHandlerStack($handlerStack);
 
-    /** @test */
-    public function register_data()
-    {
+    artisan('paymaya-sdk:webhook:retrieve')
+        ->expectsTable(
+            [
+                'id',
+                'name',
+                'callbackUrl',
+                'createdAt',
+                'updatedAt',
+            ],
+            [self::sampleWebhookData()]
+        )
+        ->assertExitCode(0);
+});
+
+it(
+    'register data',
+    function () {
         $handlerStack = HandlerStack::create(
             new MockHandler(
                 [
@@ -111,8 +108,9 @@ class WebhookCommandTest extends TestCase
 
         PaymayaFacade::client()->setHandlerStack($handlerStack);
 
-        $this->artisan('paymaya-sdk:webhook:register')
+        artisan('paymaya-sdk:webhook:register')
             ->expectsOutput('Done registering webhooks')
             ->assertExitCode(0);
     }
-}
+);
+
