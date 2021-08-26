@@ -20,7 +20,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
-        "illuminate/contracts": "^7.0|^8.0",
+        "illuminate/contracts": "^7.0|^8.40",
         "lloricode/paymaya-sdk-php": "^v0.5.0-alpha3",
         "spatie/laravel-package-tools": "^1.1"
     },
