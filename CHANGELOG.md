@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## Unreleased - TBD
+## 0.4.0-alpha2 - 2022-04-18
 
 ### Added
 
