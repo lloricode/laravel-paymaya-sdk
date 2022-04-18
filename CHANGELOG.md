@@ -9,6 +9,8 @@ All notable changes to this project will be documented in this file, in reverse 
 - Add config ray for phpunit.
 
 - Add test rows for consoles.
+-
+- Add support for laravel 9.
 
 ### Changed
 
