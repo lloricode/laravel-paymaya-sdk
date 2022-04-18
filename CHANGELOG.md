@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- Nothing.
+- Remove phly/keep-a-changelog (require symfony 6).
 
 ### Fixed
 
