@@ -50,7 +50,7 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": false
+            "pestphp/pest-plugin": true
         }
     },
     "extra": {
