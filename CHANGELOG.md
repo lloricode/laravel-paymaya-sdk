@@ -9,14 +9,16 @@ All notable changes to this project will be documented in this file, in reverse 
 - Add config ray for phpunit.
 
 - Add test rows for consoles.
--
+
 - Add support for laravel 9.
 
 ### Changed
 
 - Use pestphp for testing.
 
-- Set minimum to latest spatie laravel ray 1.24.2
+- Set minimum to latest spatie laravel ray 1.24.2.
+
+- Set minimum to latest lloricode/paymaya-sdk-php ^0.5.0-alpha4.
 
 ### Deprecated
 
