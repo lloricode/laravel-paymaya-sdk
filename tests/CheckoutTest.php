@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Tests;
 
 use ErrorException;
@@ -13,7 +15,8 @@ use Lloricode\Paymaya\Test\TestHelper;
 
 use function PHPUnit\Framework\assertEquals;
 
-it('success checkout',
+it(
+    'success checkout',
     function () {
         $id = 'test-generated-id';
         $url = 'http://test';

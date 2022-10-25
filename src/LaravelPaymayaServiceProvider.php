@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya;
 
 use Lloricode\LaravelPaymaya\Commands\Customization\DeleteCustomizationCommand;
@@ -29,9 +31,7 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
             );
     }
 
-    /**
-     * @return void
-     */
+    /** @return void */
     public function packageRegistered()
     {
         $this->app->singleton(

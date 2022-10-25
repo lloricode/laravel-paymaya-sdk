@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya;
 
 use Lloricode\LaravelPaymaya\Facades\CheckoutFacade;

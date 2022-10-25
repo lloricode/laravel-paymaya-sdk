@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
 use Illuminate\Console\Command;

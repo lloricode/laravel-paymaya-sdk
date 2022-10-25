@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
 
 use Illuminate\Console\Command;

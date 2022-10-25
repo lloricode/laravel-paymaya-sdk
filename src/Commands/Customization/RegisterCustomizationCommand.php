@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
 use GuzzleHttp\Exception\ClientException;
@@ -13,9 +15,7 @@ class RegisterCustomizationCommand extends Command
 
     public $description = 'Register customization';
 
-    /**
-     * @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties
-     */
+    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
     public function handle()
     {
         try {
@@ -24,7 +24,7 @@ class RegisterCustomizationCommand extends Command
 
             $this->info('Done registering customization');
         } catch (ClientException $exception) {
-            $response = (array)json_decode((string)$exception->getResponse()->getBody(), true);
+            $response = (array) json_decode((string) $exception->getResponse()->getBody(), true);
 
             if (in_array($response['message'] ?: null, ['Missing/invalid parameters.'])) {
                 $this->error('Missing/invalid parameters.');

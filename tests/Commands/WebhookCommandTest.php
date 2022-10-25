@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Tests\Commands;
 
 use GuzzleHttp\Handler\MockHandler;
@@ -113,4 +115,3 @@ it(
             ->assertExitCode(0);
     }
 );
-

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Lloricode\Paymaya\PaymayaClient;
 use Lloricode\Paymaya\Request\Webhook\Webhook;
 
@@ -24,9 +26,9 @@ return [
         Webhook::CHECKOUT_FAILURE => 'api/payment-callback/paymaya/failure',
         Webhook::CHECKOUT_DROPOUT => 'api/payment-callback/paymaya/dropout',
 
-//        Webhook::PAYMENT_SUCCESS => 'api/test/success',
-//        Webhook::PAYMENT_EXPIRED => 'api/test/expired',
-//        Webhook::PAYMENT_FAILED => 'api/test/failed',
+        //        Webhook::PAYMENT_SUCCESS => 'api/test/success',
+        //        Webhook::PAYMENT_EXPIRED => 'api/test/expired',
+        //        Webhook::PAYMENT_FAILED => 'api/test/failed',
     ],
 
     'checkout' => [
@@ -35,8 +37,8 @@ return [
             'iconUrl' => 'https://image2.png',
             'appleTouchIconUrl' => 'https://image3.png',
             'customTitle' => 'test paymaya sandbox title',
-            'colorScheme' => '#e01c44',            
-            'redirectTimer'=> 3,
+            'colorScheme' => '#e01c44',
+            'redirectTimer' => 3,
         ],
     ],
 ];

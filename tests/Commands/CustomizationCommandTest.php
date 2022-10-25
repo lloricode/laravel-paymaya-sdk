@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Lloricode\LaravelPaymaya\Tests\Commands;
 
 use GuzzleHttp\Handler\MockHandler;
@@ -135,7 +137,7 @@ it('handle invalid parameter', function () {
 
     $history = [];
 
-    $errorArray = (array)json_decode($responseError, true);
+    $errorArray = (array) json_decode($responseError, true);
 
     PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
@@ -163,7 +165,6 @@ it('delete_data', function () {
     artisan('paymaya-sdk:customization:delete')
         ->expectsOutput('Done deleting customization')
         ->assertExitCode(0);
-
 
     /** @var \GuzzleHttp\Psr7\Response $response */
     $response = $history[0]['response'];

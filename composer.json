@@ -21,10 +21,11 @@
         "php": "^8.0",
         "ext-json": "*",
         "illuminate/contracts": "^7.0|^8.0|^9.0",
-        "lloricode/paymaya-sdk-php": "^0.5.0-alpha4",
+        "lloricode/paymaya-sdk-php": "dev-latest-skeleton",
         "spatie/laravel-package-tools": "^1.1"
     },
     "require-dev": {
+        "laravel/pint": "^1.0",
         "composer-runtime-api": "^2.0",
         "orchestra/testbench": "^5.0|^6.0|^7.0",
         "pestphp/pest": "^1.16",
@@ -43,9 +44,11 @@
         }
     },
     "scripts": {
-        "psalm": "vendor/bin/psalm",
-        "test": "vendor/bin/phpunit --colors=always",
-        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
     },
     "config": {
         "sort-packages": true,
