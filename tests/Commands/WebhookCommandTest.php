@@ -19,7 +19,7 @@ it('retrieve data', function () {
                 new Response(
                     200,
                     [],
-                    json_encode([self::sampleWebhookData()]),
+                    json_encode([sampleWebhookData()]),
                 ),
             ]
         )
@@ -36,7 +36,7 @@ it('retrieve data', function () {
                 'createdAt',
                 'updatedAt',
             ],
-            [self::sampleWebhookData()]
+            [sampleWebhookData()]
         )
         ->assertExitCode(0);
 });
@@ -52,7 +52,7 @@ it(
                         [],
                         json_encode(
                             [
-                                self::sampleWebhookData(),
+                                sampleWebhookData(),
                             ],
                         ),
                     ),
@@ -60,7 +60,7 @@ it(
                         200,
                         [],
                         json_encode(
-                            self::sampleWebhookData(
+                            sampleWebhookData(
                                 [
                                     'name' => Webhook::CHECKOUT_SUCCESS,
                                     'id' => 'test-generated-id1',
@@ -72,7 +72,7 @@ it(
                         200,
                         [],
                         json_encode(
-                            self::sampleWebhookData(
+                            sampleWebhookData(
                                 [
                                     'name' => Webhook::CHECKOUT_SUCCESS,
                                     'id' => 'test-generated-id1',
@@ -84,7 +84,7 @@ it(
                         200,
                         [],
                         json_encode(
-                            self::sampleWebhookData(
+                            sampleWebhookData(
                                 [
                                     'name' => Webhook::CHECKOUT_FAILURE,
                                     'id' => 'test-generated-id2',
@@ -96,7 +96,7 @@ it(
                         200,
                         [],
                         json_encode(
-                            self::sampleWebhookData(
+                            sampleWebhookData(
                                 [
                                     'name' => Webhook::CHECKOUT_DROPOUT,
                                     'id' => 'test-generated-id3',
