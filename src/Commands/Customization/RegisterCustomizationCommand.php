@@ -16,7 +16,7 @@ class RegisterCustomizationCommand extends Command
     public $description = 'Register customization';
 
     /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
-    public function handle()
+    public function handle(): int
     {
         try {
             PaymayaFacade::customization()
@@ -28,10 +28,13 @@ class RegisterCustomizationCommand extends Command
 
             if (in_array($response['message'] ?: null, ['Missing/invalid parameters.'])) {
                 $this->error('Missing/invalid parameters.');
+                /** @phpstan-ignore-next-line  */
                 $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
             }
 
             return 1;
         }
+
+        return self::SUCCESS;
     }
 }

@@ -28,6 +28,7 @@ class RegisterWebHookCommand extends Command
                 ->register(
                     (new Webhook())
                         ->setName($name)
+                        /** @phpstan-ignore-next-line  */
                         ->setCallbackUrl(url($url))
                 );
         }

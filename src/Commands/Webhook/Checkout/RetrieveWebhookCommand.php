@@ -36,8 +36,8 @@ class RetrieveWebhookCommand extends Command
                 'id' => $webhookResponse->id,
                 'name' => $webhookResponse->name,
                 'callbackUrl' => $webhookResponse->callbackUrl,
-                'createdAt' => $webhookResponse->createdAt->toString(),
-                'updatedAt' => $webhookResponse->updatedAt->toString(),
+                'createdAt' => $webhookResponse->createdAt?->toString(),
+                'updatedAt' => $webhookResponse->updatedAt?->toString(),
             ];
         }
 
