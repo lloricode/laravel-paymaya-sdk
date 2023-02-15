@@ -237,7 +237,7 @@ use PaymayaSDK;
             $mock[] = new Response(
                 $value['status'] ?? 200,
                 $value['headers'] ?? [],
-                $value['body'] ?? [],
+                json_encode($value['body'] ?? []),
             );
         }
 
@@ -263,12 +263,10 @@ Sample usage of mock
             $this->fakePaymaya(
                 [
                     [
-                        'body' => json_encode(
-                            [
-                                'checkoutId' => $paymayaID,
-                                'redirectUrl' => $paymayaRedirectUrl,
-                            ]
-                        ),
+                        'body' => [
+                            'checkoutId' => $paymayaID,
+                            'redirectUrl' => $paymayaRedirectUrl,
+                        ],
                     ],
                 ]
             );
