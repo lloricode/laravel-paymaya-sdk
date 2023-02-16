@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v1.0.0 - 2023-02-16
+
+### Added
+
+- Add --ci on pest in GitHub action
+
+- Install rector
+
+- Install laravel pint
+
+### Changed
+
+- Use phpstan
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Remove psalm
+
+### Fixed
+
+- Nothing.
+
 ## 0.4.0-alpha2 - 2022-04-18
 
 ### Added
