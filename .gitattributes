@@ -9,4 +9,5 @@
 /tests              export-ignore
 /.editorconfig      export-ignore
 /.php_cs.dist       export-ignore
-/phpstan.neon.dist    export-ignore
+/phpstan.neon.dist  export-ignore
+/rector.php         export-ignore

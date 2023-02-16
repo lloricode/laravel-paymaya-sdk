@@ -49,7 +49,7 @@ it(
             $this->fail('ErrorException');
         } catch (ClientException $e) {
             $this->fail('ClientException: '.$e->getMessage().$e->getResponse()->getBody());
-        } catch (GuzzleException $e) {
+        } catch (GuzzleException) {
             $this->fail('GuzzleException');
         }
 
