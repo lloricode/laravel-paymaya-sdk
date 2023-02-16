@@ -15,6 +15,7 @@ jobs:
         include:
           - laravel: 10.*
             testbench: 8.*
+            carbon: ^2.63
           - laravel: 9.*
             testbench: 7.*
           - laravel: 8.*
@@ -34,7 +35,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -50,8 +51,11 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
-      - name: Execute pest
-        run: vendor/bin/pest --coverage
+      - name: List Installed Dependencies
+        run: composer show -D
+
+      - name: Execute test
+        run: vendor/bin/pest --coverage --ci
