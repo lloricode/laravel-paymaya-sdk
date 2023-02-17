@@ -7,6 +7,9 @@ namespace Lloricode\LaravelPaymaya\Tests\Commands;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Lloricode\LaravelPaymaya\Commands\Customization\DeleteCustomizationCommand;
+use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
+use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 
 use function Pest\Laravel\artisan;
@@ -46,7 +49,7 @@ it('retrieve data', function () {
         $rows[] = [$field, is_bool($value) ? ($value ? 'true' : 'false') : $value];
     }
 
-    artisan('paymaya-sdk:customization:retrieve')
+    artisan(RetrieveCustomizationCommand::class)
         ->expectsTable(['Field', 'Value'], $rows)
         ->assertExitCode(0);
 });
@@ -78,7 +81,7 @@ it('register data', function () {
 
     PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
-    artisan('paymaya-sdk:customization:register')
+    artisan(RegisterCustomizationCommand::class)
         ->expectsOutput('Done registering customization')
         ->assertExitCode(0);
 
@@ -141,7 +144,7 @@ it('handle invalid parameter', function () {
 
     PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
-    artisan('paymaya-sdk:customization:register')
+    artisan(RegisterCustomizationCommand::class)
         ->expectsOutput('Missing/invalid parameters.')
         ->expectsOutput(json_encode($errorArray['parameters'], JSON_PRETTY_PRINT))
         ->assertExitCode(1);
@@ -162,7 +165,7 @@ it('delete_data', function () {
 
     PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
-    artisan('paymaya-sdk:customization:delete')
+    artisan(DeleteCustomizationCommand::class)
         ->expectsOutput('Done deleting customization')
         ->assertExitCode(0);
 
