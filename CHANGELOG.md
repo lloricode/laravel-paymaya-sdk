@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v2.0.0-alpha - 2023-02-17
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Use `lloricode/paymaya-sdk-php`: ^2.0.0-alpha
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## v1.0.0 - 2023-02-16
 
 ### Added

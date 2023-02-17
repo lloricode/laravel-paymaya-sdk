@@ -15,12 +15,12 @@ class RegisterCustomizationCommand extends Command
 
     public $description = 'Register customization';
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
+    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): int
     {
         try {
             PaymayaFacade::customization()
-                ->register(new Customization(config('paymaya-sdk.checkout.customization')));
+                ->register(new Customization(...config('paymaya-sdk.checkout.customization')));
 
             $this->info('Done registering customization');
         } catch (ClientException $exception) {

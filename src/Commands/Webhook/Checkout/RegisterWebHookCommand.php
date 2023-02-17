@@ -14,7 +14,7 @@ class RegisterWebHookCommand extends Command
 
     public $description = 'Register webhook';
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
+    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): void
     {
         PaymayaFacade::webhook()->deleteAll();

@@ -13,13 +13,13 @@ class RetrieveWebhookCommand extends Command
 
     public $description = 'Retrieve registered webhooks';
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
+    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): void
     {
         $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $this->retrieveWebhooks());
     }
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
+    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function retrieveWebhooks(): array
     {
         $return = [];
@@ -29,8 +29,8 @@ class RetrieveWebhookCommand extends Command
                 'id' => $webhookResponse->id,
                 'name' => $webhookResponse->name,
                 'callbackUrl' => $webhookResponse->callbackUrl,
-                'createdAt' => $webhookResponse->createdAt?->toString(),
-                'updatedAt' => $webhookResponse->updatedAt?->toString(),
+                'createdAt' => $webhookResponse->createdAt,
+                'updatedAt' => $webhookResponse->updatedAt,
             ];
         }
 

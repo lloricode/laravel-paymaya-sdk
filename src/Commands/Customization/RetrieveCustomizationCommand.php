@@ -13,7 +13,7 @@ class RetrieveCustomizationCommand extends Command
 
     public $description = 'Retrieve registered customization';
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException|\Spatie\DataTransferObject\Exceptions\UnknownProperties */
+    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): void
     {
         $data = PaymayaFacade::customization()->retrieve()->toArray();
