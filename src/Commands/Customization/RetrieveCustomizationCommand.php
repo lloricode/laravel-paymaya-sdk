@@ -14,7 +14,7 @@ class RetrieveCustomizationCommand extends Command
     public $description = 'Retrieve registered customization';
 
     /** @throws \GuzzleHttp\Exception\GuzzleException*/
-    public function handle(): void
+    public function handle(): int
     {
         $data = PaymayaFacade::customization()->retrieve()->toArray();
 
@@ -25,5 +25,7 @@ class RetrieveCustomizationCommand extends Command
         }
 
         $this->table(['Field', 'Value'], $rows);
+
+        return self::SUCCESS;
     }
 }

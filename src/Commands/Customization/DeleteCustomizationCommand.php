@@ -14,10 +14,12 @@ class DeleteCustomizationCommand extends Command
     public $description = 'Delete registered customization';
 
     /** @throws \GuzzleHttp\Exception\GuzzleException */
-    public function handle(): void
+    public function handle(): int
     {
         PaymayaFacade::customization()->delete();
 
         $this->info('Done deleting customization');
+
+        return self::SUCCESS;
     }
 }
