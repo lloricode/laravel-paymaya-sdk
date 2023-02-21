@@ -16,6 +16,8 @@ return [
         'secret' => env('PAYMAYA_SECRET_KEY'),
     ],
 
+    'timeout' => 3,
+
     /**
      *
      * Webhooks

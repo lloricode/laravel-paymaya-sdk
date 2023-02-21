@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v2.0.0-alpha.2 - 2023-02-21
+
+### Added
+
+- Add timeout.
+
+### Changed
+
+- Nothing.
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## v2.0.0-alpha - 2023-02-17
 
 ### Added

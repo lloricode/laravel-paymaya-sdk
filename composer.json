@@ -21,7 +21,7 @@
         "php": "^8.0",
         "ext-json": "*",
         "illuminate/contracts": "^8.83.27|^9.51.0|^10.0.0",
-        "lloricode/paymaya-sdk-php": "^2.0.0-alpha",
+        "lloricode/paymaya-sdk-php": "^2.0.0-alpha.2",
         "spatie/laravel-package-tools": "^1.1"
     },
     "require-dev": {
