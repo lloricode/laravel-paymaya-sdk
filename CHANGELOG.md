@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- Nothing.
+- Use `lloricode/paymaya-sdk-php`: ^2.0.0-alpha.2
 
 ### Deprecated
 
