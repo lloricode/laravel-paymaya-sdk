@@ -26,7 +26,7 @@ class RegisterCustomizationCommand extends Command
         } catch (ClientException $exception) {
             $response = (array) json_decode((string) $exception->getResponse()->getBody(), true);
 
-            if (in_array($response['message'] ?: null, ['Missing/invalid parameters.'])) {
+            if (in_array($response['message'] ?? null, ['Missing/invalid parameters.'])) {
                 $this->error('Missing/invalid parameters.');
                 /** @phpstan-ignore-next-line  */
                 $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
