@@ -32,7 +32,7 @@ class RegisterCustomizationCommand extends Command
                 $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
             }
 
-            return 1;
+            return self::FAILURE;
         }
 
         return self::SUCCESS;
