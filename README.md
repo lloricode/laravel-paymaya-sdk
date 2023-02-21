@@ -1,7 +1,7 @@
 # Paymaya SDK for Laravel 8+
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lloricode/laravel-paymaya-sdk.svg?style=flat-square)](https://packagist.org/packages/lloricode/laravel-paymaya-sdk)
-[![Tests](https://img.shields.io/github/actions/workflow/status/lloricode/laravel-paymaya-sdk/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/lloricode/laravel-paymaya-sdk/actions/workflows/run-tests.yml)
+[![Tests](https://github.com/lloricode/laravel-paymaya-sdk/actions/workflows/run-tests.yml/badge.svg)](https://github.com/lloricode/laravel-paymaya-sdk/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/lloricode/laravel-paymaya-sdk.svg?style=flat-square)](https://packagist.org/packages/lloricode/laravel-paymaya-sdk)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=V8PYXUNG6QP44)
 
