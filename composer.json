@@ -21,11 +21,11 @@
         "php": "^8.0",
         "ext-json": "*",
         "illuminate/contracts": "^8.83.27|^9.51.0|^10.0.0",
-        "lloricode/paymaya-sdk-php": "^2.0.0-alpha.2",
+        "lloricode/paymaya-sdk-php": "^2.0.0",
         "spatie/laravel-package-tools": "^1.1"
     },
     "require-dev": {
-        "composer-runtime-api": "^2.0",
+        "composer-runtime-api": "^2.2.2",
         "laravel/pint": "^1.5",
         "nesbot/carbon": "^2.63",
         "orchestra/testbench": "^6.25.1|^7.22.0|^8.0.0",
