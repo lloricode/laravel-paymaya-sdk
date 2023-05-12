@@ -44,7 +44,7 @@ it(
 
         try {
             $checkoutResponse = PaymayaFacade::checkout()->execute(TestHelper::buildCheckout());
-//            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
+            //            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
         } catch (ErrorException $e) {
             $this->fail('ErrorException');
         } catch (ClientException $e) {

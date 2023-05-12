@@ -93,7 +93,7 @@ it('register data', function () {
     assertEquals(200, $response->getStatusCode());
 
     // TODO: missing response but working ok
-//        $this->assertEquals(json_encode($data), $response->getBody()->getContents());
+    //        $this->assertEquals(json_encode($data), $response->getBody()->getContents());
 });
 
 it('handle invalid parameter', function () {

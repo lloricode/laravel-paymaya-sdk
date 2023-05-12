@@ -18,5 +18,5 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
 
-//    $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon.dist');
+    //    $rectorConfig->phpstanConfig(__DIR__ . '/phpstan.neon.dist');
 };
