@@ -14,7 +14,8 @@
         {
             "name": "Lloric Mayuga Garcia",
             "email": "lloricode@gmail.com",
-            "role": "Developer"
+            "role": "Developer",
+            "homepage": "https://lloricode.com"
         }
     ],
     "require": {
