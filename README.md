@@ -6,6 +6,9 @@
 [![codecov](https://codecov.io/gh/lloricode/laravel-paymaya-sdk/branch/main/graph/badge.svg?token=JXRH9XB4BL)](https://codecov.io/gh/lloricode/laravel-paymaya-sdk)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/donate?hosted_button_id=V8PYXUNG6QP44)
 
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/D1D71HJZD)
+
 Paymaya SDK for laravel, it uses [lloricode/paymaya-sdk-php](https://github.com/lloricode/paymaya-sdk-php).
 
 - [Installation](#installation)
