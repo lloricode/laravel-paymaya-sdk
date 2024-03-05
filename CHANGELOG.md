@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v2.0.1 - 2024-03-05
+
+### Added
+
+- Nothing.
+
+### Changed
+
+- Add support for laravel 11
+
+### Deprecated
+
+- Nothing.
+
+### Removed
+
+- Nothing.
+
+### Fixed
+
+- Nothing.
+
 ## v2.0.0 - 2023-04-28
 
 ### Added
