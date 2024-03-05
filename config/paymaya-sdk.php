@@ -19,9 +19,7 @@ return [
     'timeout' => 3,
 
     /**
-     *
      * Webhooks
-     *
      */
     'webhooks' => [
         Webhook::CHECKOUT_SUCCESS => 'api/payment-callback/paymaya/success',
