@@ -28,7 +28,6 @@
     "require-dev": {
         "composer-runtime-api": "^2.2.2",
         "laravel/pint": "^1.14",
-        "nesbot/carbon": "^2.72.3",
         "orchestra/testbench": "^8.0|^9.0",
         "pestphp/pest": "^2.34.1",
         "pestphp/pest-plugin-laravel": "^2.3",
@@ -54,8 +53,8 @@
         "test": "vendor/bin/pest",
         "test-coverage": "vendor/bin/pest --coverage",
         "format": "vendor/bin/pint",
-        "rector": "vendor/bin/rector process",
-        "rector-dry-run": "vendor/bin/rector process --dry-run"
+        "refactor": "vendor/bin/rector process",
+        "refactor-dry-run": "vendor/bin/rector process --dry-run"
     },
     "config": {
         "sort-packages": true,
