@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v2.0.2 - 2025-02-21
+
+### What's Changed
+
+* Add support for laravel 12
+* Drop support laravel 10
+* Bump dependabot/fetch-metadata from 1.6.0 to 2.0.0 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/11
+* Bump aglipanci/laravel-pint-action from 2.3.1 to 2.4 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/12
+* Bump dependabot/fetch-metadata from 2.0.0 to 2.1.0 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/13
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/14
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/16
+* Bump codecov/codecov-action from 4 to 5 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/15
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/lloricode/laravel-paymaya-sdk/pull/17
+
+**Full Changelog**: https://github.com/lloricode/laravel-paymaya-sdk/compare/v2.0.1...v2.0.2
+
 ## v2.0.1 - 2024-03-05
 
 ### Added
@@ -95,10 +111,11 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Add --ci on pest in GitHub action
-
+  
 - Install rector
-
+  
 - Install laravel pint
+  
 
 ### Changed
 
@@ -121,18 +138,20 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Add config ray for phpunit.
-
+  
 - Add test rows for consoles.
-
+  
 - Add support for laravel 9.
+  
 
 ### Changed
 
 - Use pestphp for testing.
-
+  
 - Set minimum to latest spatie laravel ray 1.24.2.
-
+  
 - Set minimum to latest lloricode/paymaya-sdk-php ^0.5.0-alpha4.
+  
 
 ### Deprecated
 
@@ -151,16 +170,18 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Add composer-runtime-api:^2.0 in require --dev, to enforce use composer v2 in development.
-
+  
 - Add phly/keep-a-changelog in require --dev.
+  
 
 ### Changed
 
 - Set Minimum lloricode/paymaya-sdk-php:^v0.5.0-alpha3.
-
+  
 - Move todo from changelog to config file.
-
+  
 - Update changelog format.
+  
 
 ### Deprecated
 
@@ -245,8 +266,9 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Add missing facade alias.
-
+  
 - Add support for laravel ^7.0.
+  
 
 ### Changed
 
@@ -275,8 +297,9 @@ All notable changes to this project will be documented in this file, in reverse 
 - Fix test console expectsTable with minimum `laravel/framework:^8.22`,
   see [v8.22 changelog](https://github.com/laravel/framework/blob/8.x/CHANGELOG-8.x.md#v8220-2021-01-12)
   and [laravel PR #35820](https://github.com/laravel/framework/pull/35820)..
-
+  
 - Set minimum version lloricode/paymaya-sdk-php ^0.4.1.
+  
 
 ### Deprecated
 
@@ -383,8 +406,9 @@ All notable changes to this project will be documented in this file, in reverse 
 ### Added
 
 - Add main facade manager.
-
+  
 - Add facade for webhook.
+  
 
 ### Changed
 
