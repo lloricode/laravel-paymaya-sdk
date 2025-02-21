@@ -19,10 +19,10 @@ class RegisterWebHookCommand extends Command
     {
         PaymayaFacade::webhook()->deleteAll();
 
-        foreach (config('paymaya-sdk.webhooks') as $name => $url) {
+        foreach (config()->array('paymaya-sdk.webhooks') as $name => $url) {
             PaymayaFacade::webhook()
                 ->register(
-                    (new Webhook())
+                    (new Webhook)
                         ->setName($name)
                         /** @phpstan-ignore-next-line  */
                         ->setCallbackUrl(url($url))

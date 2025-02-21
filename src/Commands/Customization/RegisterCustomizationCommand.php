@@ -20,7 +20,8 @@ class RegisterCustomizationCommand extends Command
     {
         try {
             PaymayaFacade::customization()
-                ->register(new Customization(...config('paymaya-sdk.checkout.customization')));
+                /** @phpstan-ignore argument.type */
+                ->register(new Customization(...config()->array('paymaya-sdk.checkout.customization')));
 
             $this->info('Done registering customization');
         } catch (ClientException $exception) {

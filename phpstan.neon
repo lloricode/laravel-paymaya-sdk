@@ -1,0 +1,11 @@
+parameters:
+    level: max
+    paths:
+        - src
+    tmpDir: build/phpstan
+
+    ignoreErrors:
+        - identifier: missingType.iterableValue
+
+    errorFormat: ticketswap
+    editorUrl: 'phpstorm://open?file=%%file%%&line=%%line%%'

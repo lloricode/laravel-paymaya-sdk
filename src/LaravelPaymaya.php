@@ -17,21 +17,25 @@ class LaravelPaymaya
 {
     public static function client(): PaymayaClient
     {
+        /** @phpstan-ignore return.type */
         return ClientFacade::getFacadeRoot();
     }
 
     public static function checkout(): CheckoutClient
     {
+        /** @phpstan-ignore return.type */
         return CheckoutFacade::getFacadeRoot();
     }
 
     public static function webhook(): WebhookClient
     {
+        /** @phpstan-ignore return.type */
         return WebhookFacade::getFacadeRoot();
     }
 
     public static function customization(): CustomizationClient
     {
+        /** @phpstan-ignore return.type */
         return CustomizationFacade::getFacadeRoot();
     }
 }

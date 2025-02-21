@@ -49,7 +49,7 @@ it(
         $handlerStack = HandlerStack::create(
             new MockHandler(
                 [
-                    new Response( //retrieve
+                    new Response( // retrieve
                         200,
                         [],
                         json_encode(

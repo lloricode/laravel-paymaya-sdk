@@ -45,7 +45,7 @@ it(
         try {
             $checkoutResponse = PaymayaFacade::checkout()->execute(TestHelper::buildCheckout());
             //            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
-        } catch (ErrorException $e) {
+        } catch (ErrorException) {
             $this->fail('ErrorException');
         } catch (ClientException $e) {
             $this->fail('ClientException: '.$e->getMessage().$e->getResponse()->getBody());
