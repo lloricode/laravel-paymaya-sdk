@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RetrieveWebhookCommand;
 use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
+use Saloon\Exceptions\Request\ClientException;
+use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -56,7 +58,7 @@ it('handle invalid credentials', function () {
     artisan(RetrieveWebhookCommand::class)
         ->assertFailed();
 })
-    ->throws(mockInvalidCredentialsMessage());
+    ->throws(ClientException::class, mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -67,4 +69,4 @@ it('handle unknow error', function () {
     artisan(RetrieveWebhookCommand::class)
         ->assertFailed();
 })
-    ->throws('Internal Server Error (500) Response: []');
+    ->throws(InternalServerErrorException::class, 'Internal Server Error (500) Response: []');

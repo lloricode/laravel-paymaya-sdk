@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
 use Lloricode\Paymaya\Requests\Customization\RegisterCustomizationRequest;
+use Saloon\Exceptions\Request\ClientException;
+use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
@@ -65,12 +67,10 @@ it('handle invalid parameter', function () {
         RegisterCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
     ]);
 
-
     artisan(RegisterCustomizationCommand::class)
-        ->expectsOutput('Missing/invalid parameters.')
         ->assertFailed();
 
-})->throws('Bad Request (400) Response: {
+})->throws(ClientException::class, 'Bad Request (400) Response: {
     "code": "2553",
     "message": "Missing\/invalid parameters.",
     "parameters": [
@@ -96,7 +96,7 @@ it('handle invalid credentials', function () {
     artisan(RegisterCustomizationCommand::class)
         ->assertFailed();
 })
-    ->throws(mockInvalidCredentialsMessage());
+    ->throws(ClientException::class, mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -107,4 +107,4 @@ it('handle unknow error', function () {
     artisan(RegisterCustomizationCommand::class)
         ->assertFailed();
 })
-    ->throws('Internal Server Error (500) Response: []');
+    ->throws(InternalServerErrorException::class, 'Internal Server Error (500) Response: []');
