@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
+namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;

@@ -17,16 +17,15 @@ class RegisterCustomizationCommand extends Command
     {
         $response = PaymayaFacade::connector()->send(new RegisterCustomizationRequest(
             new CustomizationDto(
-                ...config()->array('paymaya-sdk.checkout.customization')
-                //                logoUrl: config('paymaya-sdk.checkout.customization.logoUrl'),
-                //                iconUrl: config('paymaya-sdk.checkout.customization.iconUrl'),
-                //                appleTouchIconUrl: config('paymaya-sdk.checkout.customization.appleTouchIconUrl'),
-                //                customTitle: config('paymaya-sdk.checkout.customization.customTitle'),
-                //                colorScheme: config('paymaya-sdk.checkout.customization.colorScheme'),
-                //                redirectTimer: config('paymaya-sdk.checkout.customization.redirectTimer'),
-                //                hideReceiptInput: config('paymaya-sdk.checkout.customization.hideReceiptInput'),
-                //                skipResultPage: config('paymaya-sdk.checkout.customization.skipResultPage'),
-                //                showMerchantName: config('paymaya-sdk.checkout.customization.showMerchantName'),
+                logoUrl: config()->string('paymaya-sdk.checkout.customization.logoUrl'),
+                iconUrl: config()->string('paymaya-sdk.checkout.customization.iconUrl'),
+                appleTouchIconUrl: config()->string('paymaya-sdk.checkout.customization.appleTouchIconUrl'),
+                customTitle: config()->string('paymaya-sdk.checkout.customization.customTitle'),
+                colorScheme: config()->string('paymaya-sdk.checkout.customization.colorScheme'),
+                hideReceiptInput: config()->boolean('paymaya-sdk.checkout.customization.hideReceiptInput', false),
+                skipResultPage: config()->boolean('paymaya-sdk.checkout.customization.skipResultPage', false),
+                showMerchantName: config()->boolean('paymaya-sdk.checkout.customization.showMerchantName', true),
+                redirectTimer: config()->integer('paymaya-sdk.checkout.customization.redirectTimer', 30),
             )
         ));
 

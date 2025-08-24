@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RegisterWebHookCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\RegisterWebHookCommand;
 use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
 use Lloricode\Paymaya\Requests\Webhook\RegisterWebhookRequest;
 use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;

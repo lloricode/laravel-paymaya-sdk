@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RetrieveWebhookCommand;
+use Lloricode\LaravelPaymaya\Commands\Webhook\RetrieveWebhookCommand;
 use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
 use Saloon\Exceptions\Request\ClientException;
 use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
