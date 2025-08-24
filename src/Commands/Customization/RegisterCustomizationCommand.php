@@ -17,15 +17,16 @@ class RegisterCustomizationCommand extends Command
     {
         $response = PaymayaFacade::connector()->send(new RegisterCustomizationRequest(
             new CustomizationDto(
-                logoUrl: config('paymaya-sdk.checkout.customization.logoUrl'),
-                iconUrl: config('paymaya-sdk.checkout.customization.iconUrl'),
-                appleTouchIconUrl: config('paymaya-sdk.checkout.customization.appleTouchIconUrl'),
-                customTitle: config('paymaya-sdk.checkout.customization.customTitle'),
-                colorScheme: config('paymaya-sdk.checkout.customization.colorScheme'),
-                redirectTimer: config('paymaya-sdk.checkout.customization.redirectTimer'),
-                hideReceiptInput: config('paymaya-sdk.checkout.customization.hideReceiptInput'),
-                skipResultPage: config('paymaya-sdk.checkout.customization.skipResultPage'),
-                showMerchantName: config('paymaya-sdk.checkout.customization.showMerchantName'),
+                ...config()->array('paymaya-sdk.checkout.customization')
+                //                logoUrl: config('paymaya-sdk.checkout.customization.logoUrl'),
+                //                iconUrl: config('paymaya-sdk.checkout.customization.iconUrl'),
+                //                appleTouchIconUrl: config('paymaya-sdk.checkout.customization.appleTouchIconUrl'),
+                //                customTitle: config('paymaya-sdk.checkout.customization.customTitle'),
+                //                colorScheme: config('paymaya-sdk.checkout.customization.colorScheme'),
+                //                redirectTimer: config('paymaya-sdk.checkout.customization.redirectTimer'),
+                //                hideReceiptInput: config('paymaya-sdk.checkout.customization.hideReceiptInput'),
+                //                skipResultPage: config('paymaya-sdk.checkout.customization.skipResultPage'),
+                //                showMerchantName: config('paymaya-sdk.checkout.customization.showMerchantName'),
             )
         ));
 

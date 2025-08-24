@@ -1,0 +1,67 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Binary operation "\." between ''Failed deleting…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Commands/Customization/DeleteCustomizationCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exception of function report expects string\|Throwable, Throwable\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/Customization/DeleteCustomizationCommand.php
+
+		-
+			message: '#^Binary operation "\." between ''Failed registering…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Commands/Customization/RegisterCustomizationCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exception of function report expects string\|Throwable, Throwable\|null given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Commands/Customization/RegisterCustomizationCommand.php
+
+		-
+			message: '#^Parameter \#1 \$logoUrl of class Lloricode\\Paymaya\\DataTransferObjects\\Checkout\\Customization\\CustomizationDto constructor expects string\|null, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/Customization/RegisterCustomizationCommand.php
+
+		-
+			message: '#^Binary operation "\." between ''Failed retrieve…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Commands/Customization/RetrieveCustomizationCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exception of function report expects string\|Throwable, Throwable\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/Customization/RetrieveCustomizationCommand.php
+
+		-
+			message: '#^Binary operation "\." between ''Failed registering…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Commands/Webhook/Checkout/RegisterWebHookCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exception of function report expects string\|Throwable, Throwable\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/Webhook/Checkout/RegisterWebHookCommand.php
+
+		-
+			message: '#^Binary operation "\." between ''Failed retrieve…'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Commands/Webhook/Checkout/RetrieveWebhookCommand.php
+
+		-
+			message: '#^Parameter \#1 \$exception of function report expects string\|Throwable, Throwable\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Commands/Webhook/Checkout/RetrieveWebhookCommand.php
