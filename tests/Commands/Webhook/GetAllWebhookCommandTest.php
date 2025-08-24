@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Lloricode\LaravelPaymaya\Commands\Webhook\RetrieveWebhookCommand;
-use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
+use Lloricode\LaravelPaymaya\Commands\Webhook\GetAllWebhookCommand;
+use Lloricode\Paymaya\Requests\Webhook\GetWebhookAllRequest;
 use Saloon\Exceptions\Request\ClientException;
 use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
@@ -15,10 +15,10 @@ it('retrieve data', function () {
     $sampleData = [sampleWebhookData()];
 
     MockClient::global([
-        RetrieveWebhookRequest::class => new MockResponse(body: $sampleData),
+        GetWebhookAllRequest::class => new MockResponse(body: $sampleData),
     ]);
 
-    artisan(RetrieveWebhookCommand::class)
+    artisan(GetAllWebhookCommand::class)
         ->expectsTable(
             [
                 'id',
@@ -34,10 +34,10 @@ it('retrieve data', function () {
 it('retrieve even 404', function () {
 
     MockClient::global([
-        RetrieveWebhookRequest::class => new MockResponse(status: 404),
+        GetWebhookAllRequest::class => new MockResponse(status: 404),
     ]);
 
-    artisan(RetrieveWebhookCommand::class)
+    artisan(GetAllWebhookCommand::class)
         ->expectsTable(
             [
                 'id',
@@ -53,9 +53,9 @@ it('retrieve even 404', function () {
 
 it('handle invalid credentials', function () {
 
-    mockInvalidCredentials(RetrieveWebhookRequest::class);
+    mockInvalidCredentials(GetWebhookAllRequest::class);
 
-    artisan(RetrieveWebhookCommand::class)
+    artisan(GetAllWebhookCommand::class)
         ->assertFailed();
 })
     ->throws(ClientException::class, mockInvalidCredentialsMessage());
@@ -63,10 +63,10 @@ it('handle invalid credentials', function () {
 it('handle unknow error', function () {
 
     MockClient::global([
-        RetrieveWebhookRequest::class => new MockResponse(status: 500),
+        GetWebhookAllRequest::class => new MockResponse(status: 500),
     ]);
 
-    artisan(RetrieveWebhookCommand::class)
+    artisan(GetAllWebhookCommand::class)
         ->assertFailed();
 })
     ->throws(InternalServerErrorException::class, 'Internal Server Error (500) Response: []');
