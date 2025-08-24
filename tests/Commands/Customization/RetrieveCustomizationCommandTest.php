@@ -73,3 +73,14 @@ it('handle invalid credentials', function () {
         ->expectsOutput('Failed retrieve customization: '.$errorMessage)
         ->assertFailed();
 });
+
+it('handle unknow error', function () {
+
+    MockClient::global([
+        RetrieveCustomizationRequest::class => new MockResponse(status: 500),
+    ]);
+
+    artisan(RetrieveCustomizationCommand::class)
+        ->expectsOutput('Failed retrieve customization: unknown')
+        ->assertFailed();
+});

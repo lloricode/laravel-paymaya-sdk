@@ -82,3 +82,14 @@ it('handle invalid credentials', function () {
         ->expectsOutput('Failed registering customization: '.$errorMessage)
         ->assertFailed();
 });
+
+it('handle unknow error', function () {
+
+    MockClient::global([
+        RegisterCustomizationRequest::class => new MockResponse(status: 500),
+    ]);
+
+    artisan(RegisterCustomizationCommand::class)
+        ->expectsOutput('Failed registering customization: unknown')
+        ->assertFailed();
+});

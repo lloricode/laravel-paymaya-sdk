@@ -30,3 +30,14 @@ it('handle invalid credentials', function () {
         ->expectsOutput('Failed deleting customization: '.$errorMessage)
         ->assertFailed();
 });
+
+it('handle unknow error', function () {
+
+    MockClient::global([
+        DeleteCustomizationRequest::class => new MockResponse(status: 500),
+    ]);
+
+    artisan(DeleteCustomizationCommand::class)
+        ->expectsOutput('Failed deleting customization: unknown')
+        ->assertFailed();
+});
