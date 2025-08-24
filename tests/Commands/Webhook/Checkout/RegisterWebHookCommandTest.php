@@ -29,6 +29,24 @@ it(
     }
 );
 
+it(
+    'register data eve 404',
+    function () {
+
+        $sampleData = [sampleWebhookData()];
+
+        MockClient::global([
+            RetrieveWebhookRequest::class => new MockResponse(status: 404),
+            DeleteWebhookRequest::class => new MockResponse(status: 204),
+            RegisterWebhookRequest::class => new MockResponse(body: $sampleData),
+        ]);
+
+        artisan(RegisterWebHookCommand::class)
+            ->expectsOutput('Done registering webhooks')
+            ->assertSuccessful();
+    }
+);
+
 it('handle invalid credentials', function () {
 
     $errorMessage = mockInvalidCredentials(RetrieveWebhookRequest::class);

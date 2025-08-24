@@ -20,7 +20,9 @@ class RegisterWebHookCommand extends Command
 
         $response = PaymayaFacade::connector()->send(new RetrieveWebhookRequest);
 
-        if ($response->failed()) {
+        if ($response->status() === 404) {
+            //
+        } elseif ($response->failed()) {
 
             report($response->toException());
 
@@ -29,12 +31,8 @@ class RegisterWebHookCommand extends Command
             return self::FAILURE;
         }
 
-        try {
-            /** @var array<string, WebhookDto> $webhooks */
-            $webhooks = $response->dto();
-        } catch (\Exception $e) {
-            $webhooks = [];
-        }
+        /** @var array<string, WebhookDto> $webhooks */
+        $webhooks = $response->status() === 404 ? [] : $response->dto();
 
         foreach ($webhooks as $webhook) {
 
@@ -48,12 +46,21 @@ class RegisterWebHookCommand extends Command
         foreach (config()->array('paymaya-sdk.webhooks') as $name => $url) {
 
             /** @var string $url */
-            PaymayaFacade::connector()->send(new RegisterWebhookRequest(
+            $response = PaymayaFacade::connector()->send(new RegisterWebhookRequest(
                 new WebhookDto(
                     name: $name,
                     callbackUrl: url($url),
                 )
             ));
+
+            if ($response->failed()) {
+                report($response->toException());
+
+                $this->error('Failed registering webhooks: ['.$name.'] ['.url($url).'] '.$response->array('message', 'unknown'));
+
+                return self::FAILURE;
+
+            }
         }
 
         $this->info('Done registering webhooks');
