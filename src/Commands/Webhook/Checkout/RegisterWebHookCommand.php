@@ -24,9 +24,7 @@ class RegisterWebHookCommand extends Command
             //
         } elseif ($response->failed()) {
 
-            report($response->toException());
-
-            $this->error('Failed registering webhooks: '.$response->array('error', 'unknown'));
+            $response->throw();
 
             return self::FAILURE;
         }
@@ -53,14 +51,7 @@ class RegisterWebHookCommand extends Command
                 )
             ));
 
-            if ($response->failed()) {
-                report($response->toException());
-
-                $this->error('Failed registering webhooks: ['.$name.'] ['.url($url).'] '.$response->array('message', 'unknown'));
-
-                return self::FAILURE;
-
-            }
+            $response->throw();
         }
 
         $this->info('Done registering webhooks');

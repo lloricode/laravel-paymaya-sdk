@@ -49,12 +49,12 @@ it(
 
 it('handle invalid credentials', function () {
 
-    $errorMessage = mockInvalidCredentials(RetrieveWebhookRequest::class);
+    mockInvalidCredentials(RetrieveWebhookRequest::class);
 
     artisan(RegisterWebHookCommand::class)
-        ->expectsOutput('Failed registering webhooks: '.$errorMessage)
         ->assertFailed();
-});
+})
+    ->throws(mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -63,6 +63,6 @@ it('handle unknow error', function () {
     ]);
 
     artisan(RegisterWebHookCommand::class)
-        ->expectsOutput('Failed registering webhooks: unknown')
         ->assertFailed();
-});
+})
+    ->throws('Internal Server Error (500) Response: []');

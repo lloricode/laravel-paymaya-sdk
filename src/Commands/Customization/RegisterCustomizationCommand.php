@@ -34,24 +34,9 @@ class RegisterCustomizationCommand extends Command
             $this->info('Done registering customization');
 
             return self::SUCCESS;
-        } elseif ($response->status() === 400) {
-
-            report($response->toException());
-
-            $response = $response->array();
-
-            if (($response['message'] ?? null) === 'Missing/invalid parameters.') {
-                $this->error('Missing/invalid parameters.');
-                /** @phpstan-ignore-next-line  */
-                $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
-            }
-
-            return self::FAILURE;
         }
 
-        report($response->toException());
-
-        $this->error('Failed registering customization: '.$response->array('error', 'unknown'));
+        $response->throw();
 
         return self::FAILURE;
     }

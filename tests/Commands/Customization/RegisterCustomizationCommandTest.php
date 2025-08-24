@@ -65,23 +65,38 @@ it('handle invalid parameter', function () {
         RegisterCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
     ]);
 
-    $errorArray = (array) json_decode($responseError, true);
 
     artisan(RegisterCustomizationCommand::class)
         ->expectsOutput('Missing/invalid parameters.')
-        ->expectsOutput(json_encode($errorArray['parameters'], JSON_PRETTY_PRINT))
         ->assertFailed();
 
-});
+})->throws('Bad Request (400) Response: {
+    "code": "2553",
+    "message": "Missing\/invalid parameters.",
+    "parameters": [
+        {
+            "field": "logoUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        },
+        {
+            "field": "iconUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        },
+        {
+            "field": "appleTouchIconUrl",
+            "description": "Must be a valid url of length 5-2082, if specified; required if isPageCustomized is true and if setting at least one other customization."
+        }
+    ]
+}');
 
 it('handle invalid credentials', function () {
 
-    $errorMessage = mockInvalidCredentials(RegisterCustomizationRequest::class);
+    mockInvalidCredentials(RegisterCustomizationRequest::class);
 
     artisan(RegisterCustomizationCommand::class)
-        ->expectsOutput('Failed registering customization: '.$errorMessage)
         ->assertFailed();
-});
+})
+    ->throws(mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -90,6 +105,6 @@ it('handle unknow error', function () {
     ]);
 
     artisan(RegisterCustomizationCommand::class)
-        ->expectsOutput('Failed registering customization: unknown')
         ->assertFailed();
-});
+})
+    ->throws('Internal Server Error (500) Response: []');

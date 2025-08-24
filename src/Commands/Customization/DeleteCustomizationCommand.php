@@ -22,9 +22,7 @@ class DeleteCustomizationCommand extends Command
             return self::SUCCESS;
         }
 
-        report($response->toException());
-
-        $this->error('Failed deleting customization: '.$response->array('error', 'unknown'));
+        $response->throw();
 
         return self::FAILURE;
     }

@@ -23,10 +23,7 @@ class RetrieveWebhookCommand extends Command
         if ($response->status() === 404) {
             // no webhooks found, return empty table
         } elseif ($response->failed()) {
-
-            report($response->toException());
-
-            $this->error('Failed retrieve webhooks: '.$response->array('error', 'unknown'));
+            $response->throw();
 
             return self::FAILURE;
         }

@@ -17,17 +17,20 @@ function sampleWebhookData(array $override = []): array
     ];
 }
 
-function mockInvalidCredentials(string $request): string
+function mockInvalidCredentials(string $request): void
 {
-    $errorMessage = 'Invalid authentication credentials. Kindly verify if the key you are using is correct.';
 
     MockClient::global([
         $request => new MockResponse(body: [
-            'error' => $errorMessage,
+            'error' => 'Invalid authentication credentials. Kindly verify if the key you are using is correct.',
             'code' => 'K003',
             'reference' => 'uuid-sample',
         ], status: 401),
     ]);
 
-    return $errorMessage;
+}
+
+function mockInvalidCredentialsMessage(): string
+{
+    return 'Unauthorized (401) Response: {"error":"Invalid authentication credentials. Kindly verify if the key you are using is correct.","code":"K003","reference":"uuid-sample"}';
 }

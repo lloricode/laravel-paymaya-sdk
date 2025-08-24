@@ -24,12 +24,12 @@ it('delete data', function () {
 
 it('handle invalid credentials', function () {
 
-    $errorMessage = mockInvalidCredentials(DeleteCustomizationRequest::class);
+    mockInvalidCredentials(DeleteCustomizationRequest::class);
 
     artisan(DeleteCustomizationCommand::class)
-        ->expectsOutput('Failed deleting customization: '.$errorMessage)
         ->assertFailed();
-});
+})
+    ->throws(mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -38,6 +38,6 @@ it('handle unknow error', function () {
     ]);
 
     artisan(DeleteCustomizationCommand::class)
-        ->expectsOutput('Failed deleting customization: unknown')
         ->assertFailed();
-});
+})
+    ->throws('Internal Server Error (500) Response: []');

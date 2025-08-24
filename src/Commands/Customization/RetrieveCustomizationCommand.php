@@ -19,9 +19,8 @@ class RetrieveCustomizationCommand extends Command
         if ($response->status() === 404) {
             //
         } elseif ($response->failed()) {
-            report($response->toException());
 
-            $this->error('Failed retrieve customization: '.$response->array('error', 'unknown'));
+            $response->throw();
 
             return self::FAILURE;
         }

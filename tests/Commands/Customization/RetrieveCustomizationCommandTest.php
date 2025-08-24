@@ -67,12 +67,12 @@ it('retrieve even 404', function () {
 
 it('handle invalid credentials', function () {
 
-    $errorMessage = mockInvalidCredentials(RetrieveCustomizationRequest::class);
+    mockInvalidCredentials(RetrieveCustomizationRequest::class);
 
     artisan(RetrieveCustomizationCommand::class)
-        ->expectsOutput('Failed retrieve customization: '.$errorMessage)
         ->assertFailed();
-});
+})
+    ->throws(mockInvalidCredentialsMessage());
 
 it('handle unknow error', function () {
 
@@ -81,6 +81,6 @@ it('handle unknow error', function () {
     ]);
 
     artisan(RetrieveCustomizationCommand::class)
-        ->expectsOutput('Failed retrieve customization: unknown')
         ->assertFailed();
-});
+})
+    ->throws('Internal Server Error (500) Response: []');
