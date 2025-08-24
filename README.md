@@ -201,14 +201,14 @@ $api->send(new RetrieveCheckoutRequest($checkoutResponse->checkoutId))->dto();
 
 ```
 # see config `paymaya-sdk.webhooks` array to set your webhooks,
-# then run this to register webhooks.
+# then run this to create webhooks.
 
-php artisan paymaya-sdk:webhook:register
+php artisan paymaya-sdk:webhook:create
 
 
-# retrieve webhooks
+# get all webhooks
 
-php artisan paymaya-sdk:webhook:retrieve
+php artisan paymaya-sdk:webhook:all
 
 
 # retrieve output
@@ -223,36 +223,9 @@ php artisan paymaya-sdk:webhook:retrieve
 
 ```
 
-### Testing with Guzzle Mock
-
-Add this to your Base Test Case
-
-```php
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
-use PaymayaSDK;
-    
-    protected function fakePaymaya(array $mockResponse, &$history = [])
-    {
-        $mock = [];
-
-        foreach ($mockResponse as $value) {
-            $mock[] = new Response(
-                $value['status'] ?? 200,
-                $value['headers'] ?? [],
-                json_encode($value['body'] ?? []),
-            );
-        }
-
-        PaymayaSDK::client()->setHandlerStack(
-            HandlerStack::create(new MockHandler($mock)),
-            $history
-        );
-    }
-```
-
-Sample usage of mock
+### Testing with Saloon Client Mock
+Sample usage of client mock
+https://docs.saloon.dev/the-basics/testing
 
 ```php
 
@@ -263,20 +236,18 @@ Sample usage of mock
     {
             $paymayaID = 'test-paymaya-generated-id';
             $paymayaRedirectUrl = 'http://test-paymaya/redirect-url';
-
-            $this->fakePaymaya(
-                [
-                    [
-                        'body' => [
-                            'checkoutId' => $paymayaID,
-                            'redirectUrl' => $paymayaRedirectUrl,
-                        ],
-                    ],
-                ]
-            );
+    
+            MockClient::global([
+                CreateCheckoutRequest::class => new MockResponse(
+                    body: [
+                        'checkoutId' => $paymayaID,
+                        'redirectUrl' => $paymayaRedirectUrl,
+                    ]
+                ),
+            ]);
             
-           // you test
-           
+           // your test
+          
 
 ```
 

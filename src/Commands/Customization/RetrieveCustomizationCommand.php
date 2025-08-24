@@ -9,7 +9,7 @@ use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Requests\Customization\RetrieveCustomizationRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'paymaya-sdk:customization:retrieve', description: 'Retrieve registered customization')]
+#[AsCommand(name: 'paymaya-sdk:customization:retrieve', description: 'Retrieve customization')]
 class RetrieveCustomizationCommand extends Command
 {
     public function handle(): int

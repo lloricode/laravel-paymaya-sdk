@@ -9,7 +9,7 @@ use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Requests\Customization\RemoveCustomizationRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'paymaya-sdk:customization:remove', description: 'Delete registered customization')]
+#[AsCommand(name: 'paymaya-sdk:customization:remove', description: 'Remove customization')]
 class RemoveCustomizationCommand extends Command
 {
     public function handle(): int

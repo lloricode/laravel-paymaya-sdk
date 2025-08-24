@@ -12,7 +12,7 @@ use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
 use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'paymaya-sdk:webhook:create', description: 'Register webhook')]
+#[AsCommand(name: 'paymaya-sdk:webhook:create', description: 'Create webhook')]
 class CreateWebHookCommand extends Command
 {
     public function handle(): int
