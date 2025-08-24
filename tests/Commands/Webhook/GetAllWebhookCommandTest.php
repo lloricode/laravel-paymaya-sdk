@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Commands\Webhook\GetAllWebhookCommand;
-use Lloricode\Paymaya\Requests\Webhook\GetWebhookAllRequest;
+use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Saloon\Exceptions\Request\ClientException;
 use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
@@ -15,7 +15,7 @@ it('retrieve data', function () {
     $sampleData = [sampleWebhookData()];
 
     MockClient::global([
-        GetWebhookAllRequest::class => new MockResponse(body: $sampleData),
+        GetAllWebhookRequest::class => new MockResponse(body: $sampleData),
     ]);
 
     artisan(GetAllWebhookCommand::class)
@@ -34,7 +34,7 @@ it('retrieve data', function () {
 it('retrieve even 404', function () {
 
     MockClient::global([
-        GetWebhookAllRequest::class => new MockResponse(status: 404),
+        GetAllWebhookRequest::class => new MockResponse(status: 404),
     ]);
 
     artisan(GetAllWebhookCommand::class)
@@ -53,7 +53,7 @@ it('retrieve even 404', function () {
 
 it('handle invalid credentials', function () {
 
-    mockInvalidCredentials(GetWebhookAllRequest::class);
+    mockInvalidCredentials(GetAllWebhookRequest::class);
 
     artisan(GetAllWebhookCommand::class)
         ->assertFailed();
@@ -63,7 +63,7 @@ it('handle invalid credentials', function () {
 it('handle unknow error', function () {
 
     MockClient::global([
-        GetWebhookAllRequest::class => new MockResponse(status: 500),
+        GetAllWebhookRequest::class => new MockResponse(status: 500),
     ]);
 
     artisan(GetAllWebhookCommand::class)

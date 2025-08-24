@@ -7,7 +7,7 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
-use Lloricode\Paymaya\Requests\Webhook\GetWebhookAllRequest;
+use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'paymaya-sdk:webhook:retrieve', description: 'Retrieve registered webhooks')]
@@ -18,7 +18,7 @@ class GetAllWebhookCommand extends Command
 
         $webhooks = [];
 
-        $response = PaymayaFacade::connector()->send(new GetWebhookAllRequest);
+        $response = PaymayaFacade::connector()->send(new GetAllWebhookRequest);
 
         if ($response->status() === 404) {
             // no webhooks found, return empty table

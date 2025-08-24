@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Lloricode\LaravelPaymaya\Commands\Webhook\CreateWebHookCommand;
 use Lloricode\Paymaya\Requests\Webhook\CreateWebhookRequest;
 use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
-use Lloricode\Paymaya\Requests\Webhook\GetWebhookAllRequest;
+use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Saloon\Exceptions\Request\ClientException;
 use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
@@ -20,7 +20,7 @@ it(
         $sampleData = [sampleWebhookData()];
 
         MockClient::global([
-            GetWebhookAllRequest::class => new MockResponse(body: $sampleData),
+            GetAllWebhookRequest::class => new MockResponse(body: $sampleData),
             DeleteWebhookRequest::class => new MockResponse(status: 204),
             CreateWebhookRequest::class => new MockResponse(body: $sampleData),
         ]);
@@ -38,7 +38,7 @@ it(
         $sampleData = [sampleWebhookData()];
 
         MockClient::global([
-            GetWebhookAllRequest::class => new MockResponse(status: 404),
+            GetAllWebhookRequest::class => new MockResponse(status: 404),
             DeleteWebhookRequest::class => new MockResponse(status: 204),
             CreateWebhookRequest::class => new MockResponse(body: $sampleData),
         ]);
@@ -51,7 +51,7 @@ it(
 
 it('handle invalid credentials', function () {
 
-    mockInvalidCredentials(GetWebhookAllRequest::class);
+    mockInvalidCredentials(GetAllWebhookRequest::class);
 
     artisan(CreateWebHookCommand::class)
         ->assertFailed();
@@ -61,7 +61,7 @@ it('handle invalid credentials', function () {
 it('handle unknow error', function () {
 
     MockClient::global([
-        GetWebhookAllRequest::class => new MockResponse(status: 500),
+        GetAllWebhookRequest::class => new MockResponse(status: 500),
     ]);
 
     artisan(CreateWebHookCommand::class)

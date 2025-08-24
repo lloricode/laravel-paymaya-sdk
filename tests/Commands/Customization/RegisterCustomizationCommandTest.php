@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
-use Lloricode\Paymaya\Requests\Customization\RegisterCustomizationRequest;
+use Lloricode\Paymaya\Requests\Customization\SetCustomizationRequest;
 use Saloon\Exceptions\Request\ClientException;
 use Saloon\Exceptions\Request\Statuses\InternalServerErrorException;
 use Saloon\Http\Faking\MockClient;
@@ -23,7 +23,7 @@ it('register data', function () {
     config(['paymaya-sdk.checkout.customization' => $data]);
 
     $mockClient = MockClient::global([
-        RegisterCustomizationRequest::class => new MockResponse(body: $data),
+        SetCustomizationRequest::class => new MockResponse(body: $data),
     ]);
 
     artisan(RegisterCustomizationCommand::class)
@@ -64,7 +64,7 @@ it('handle invalid parameter', function () {
 }';
 
     MockClient::global([
-        RegisterCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
+        SetCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
     ]);
 
     artisan(RegisterCustomizationCommand::class)
@@ -91,7 +91,7 @@ it('handle invalid parameter', function () {
 
 it('handle invalid credentials', function () {
 
-    mockInvalidCredentials(RegisterCustomizationRequest::class);
+    mockInvalidCredentials(SetCustomizationRequest::class);
 
     artisan(RegisterCustomizationCommand::class)
         ->assertFailed();
@@ -101,7 +101,7 @@ it('handle invalid credentials', function () {
 it('handle unknow error', function () {
 
     MockClient::global([
-        RegisterCustomizationRequest::class => new MockResponse(status: 500),
+        SetCustomizationRequest::class => new MockResponse(status: 500),
     ]);
 
     artisan(RegisterCustomizationCommand::class)

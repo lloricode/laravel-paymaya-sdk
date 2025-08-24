@@ -9,7 +9,7 @@ use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
 use Lloricode\Paymaya\Requests\Webhook\CreateWebhookRequest;
 use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
-use Lloricode\Paymaya\Requests\Webhook\GetWebhookAllRequest;
+use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'paymaya-sdk:webhook:register', description: 'Register webhook')]
@@ -18,7 +18,7 @@ class CreateWebHookCommand extends Command
     public function handle(): int
     {
 
-        $response = PaymayaFacade::connector()->send(new GetWebhookAllRequest);
+        $response = PaymayaFacade::connector()->send(new GetAllWebhookRequest);
 
         if ($response->status() === 404) {
             //
