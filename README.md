@@ -28,7 +28,7 @@ composer require lloricode/laravel-paymaya-sdk
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider" --tag="laravel-paymaya-sdk-config"
+php artisan vendor:publish --provider="Lloricode\LaravelPaymaya\LaravelPaymayaServiceProvider" --tag="paymaya-sdk-config"
 ```
 
 This is the contents of the published config file:
