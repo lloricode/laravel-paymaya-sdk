@@ -10,8 +10,8 @@ use Lloricode\Paymaya\DataTransferObjects\Checkout\Customization\CustomizationDt
 use Lloricode\Paymaya\Requests\Customization\SetCustomizationRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'paymaya-sdk:customization:register', description: 'Register customization')]
-class RegisterCustomizationCommand extends Command
+#[AsCommand(name: 'paymaya-sdk:customization:set', description: 'Register customization')]
+class SetCustomizationCommand extends Command
 {
     public function handle(): int
     {

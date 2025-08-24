@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Lloricode\LaravelPaymaya;
 
-use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
+use Lloricode\LaravelPaymaya\Commands\Customization\SetCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RemoveCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\CreateWebHookCommand;
@@ -25,7 +25,7 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
                 [
                     GetAllWebhookCommand::class,
                     CreateWebHookCommand::class,
-                    RegisterCustomizationCommand::class,
+                    SetCustomizationCommand::class,
                     RetrieveCustomizationCommand::class,
                     RemoveCustomizationCommand::class,
                 ]
