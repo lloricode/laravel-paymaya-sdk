@@ -10,7 +10,7 @@ use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
 use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
-#[AsCommand(name: 'paymaya-sdk:webhook:retrieve', description: 'Retrieve registered webhooks')]
+#[AsCommand(name: 'paymaya-sdk:webhook:all', description: 'Retrieve registered webhooks')]
 class GetAllWebhookCommand extends Command
 {
     public function handle(): int
