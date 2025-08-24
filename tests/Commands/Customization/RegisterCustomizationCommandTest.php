@@ -2,44 +2,12 @@
 
 declare(strict_types=1);
 
-use Lloricode\LaravelPaymaya\Commands\Customization\DeleteCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
-use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
-use Lloricode\Paymaya\Requests\Customization\DeleteCustomizationRequest;
 use Lloricode\Paymaya\Requests\Customization\RegisterCustomizationRequest;
-use Lloricode\Paymaya\Requests\Customization\RetrieveCustomizationRequest;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
 
 use function Pest\Laravel\artisan;
-
-it('retrieve data', function () {
-    $data = [
-        'logoUrl' => 'https://image-logo.png',
-        'iconUrl' => 'https://image-icon.png',
-        'appleTouchIconUrl' => 'https://image-apple.png',
-        'customTitle' => 'Test Title Mock',
-        'colorScheme' => '#e01c44',
-        'redirectTimer' => 3,
-        'hideReceiptInput' => true,
-        'skipResultPage' => false,
-        'showMerchantName' => true,
-    ];
-
-    MockClient::global([
-        RetrieveCustomizationRequest::class => new MockResponse(body: $data),
-    ]);
-
-    $rows = [];
-
-    foreach ($data as $field => $value) {
-        $rows[] = [$field, is_bool($value) ? ($value ? 'true' : 'false') : $value];
-    }
-
-    artisan(RetrieveCustomizationCommand::class)
-        ->expectsTable(['Field', 'Value'], $rows)
-        ->assertSuccessful();
-});
 
 it('register data', function () {
     $data = [
@@ -93,7 +61,7 @@ it('handle invalid parameter', function () {
     ]
 }';
 
-    $mockClient = MockClient::global([
+    MockClient::global([
         RegisterCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
     ]);
 
@@ -106,15 +74,11 @@ it('handle invalid parameter', function () {
 
 });
 
-it('delete data', function () {
+it('handle invalid credentials', function () {
 
-    $mockClient = MockClient::global([
-        DeleteCustomizationRequest::class => new MockResponse(status: 204),
-    ]);
+    $errorMessage = mockInvalidCredentials(RegisterCustomizationRequest::class);
 
-    artisan(DeleteCustomizationCommand::class)
-        ->expectsOutput('Done deleting customization')
-        ->assertSuccessful();
-
-    $mockClient->assertSentCount(1);
+    artisan(RegisterCustomizationCommand::class)
+        ->expectsOutput('Failed registering customization: '.$errorMessage)
+        ->assertFailed();
 });

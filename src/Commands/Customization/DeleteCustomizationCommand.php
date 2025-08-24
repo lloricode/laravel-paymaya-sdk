@@ -14,10 +14,18 @@ class DeleteCustomizationCommand extends Command
 {
     public function handle(): int
     {
-        PaymayaFacade::connector()->send(new DeleteCustomizationRequest);
+        $response = PaymayaFacade::connector()->send(new DeleteCustomizationRequest);
 
-        $this->info('Done deleting customization');
+        if ($response->successful()) {
+            $this->info('Done deleting customization');
 
-        return self::SUCCESS;
+            return self::SUCCESS;
+        }
+
+        report($response->toException());
+
+        $this->error('Failed deleting customization: '.$response->array('error') ?? 'unknown');
+
+        return self::FAILURE;
     }
 }

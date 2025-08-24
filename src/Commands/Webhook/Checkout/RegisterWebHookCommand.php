@@ -15,11 +15,23 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'paymaya-sdk:webhook:register', description: 'Register webhook')]
 class RegisterWebHookCommand extends Command
 {
-    public function handle(): void
+    public function handle(): int
     {
+
+        $response = PaymayaFacade::connector()->send(new RetrieveWebhookRequest);
+
+        if ($response->failed()) {
+
+            report($response->toException());
+
+            $this->error('Failed registering webhooks: '.$response->array('error') ?? 'unknown');
+
+            return self::FAILURE;
+        }
+
         try {
             /** @var array<string, WebhookDto> $webhooks */
-            $webhooks = PaymayaFacade::connector()->send(new RetrieveWebhookRequest)->dto();
+            $webhooks = $response->dto();
         } catch (\Exception $e) {
             $webhooks = [];
         }
@@ -45,5 +57,7 @@ class RegisterWebHookCommand extends Command
         }
 
         $this->info('Done registering webhooks');
+
+        return self::SUCCESS;
     }
 }

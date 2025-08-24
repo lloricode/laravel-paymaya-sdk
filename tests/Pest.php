@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Tests\TestCase;
+use Lloricode\Paymaya\Enums\Environment;
 use Saloon\Config;
 use Saloon\Http\Faking\MockClient;
 
@@ -12,6 +13,7 @@ uses(TestCase::class)
         MockClient::destroyGlobal();
 
         config([
+            'paymaya-sdk.mode' => Environment::sandbox->value,
             'paymaya-sdk.keys' => [
                 'public' => 'fake-publicKey',
                 'secret' => 'fake-secretKey',

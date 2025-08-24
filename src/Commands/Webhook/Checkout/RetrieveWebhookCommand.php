@@ -13,21 +13,30 @@ use Symfony\Component\Console\Attribute\AsCommand;
 #[AsCommand(name: 'paymaya-sdk:webhook:retrieve', description: 'Retrieve registered webhooks')]
 class RetrieveWebhookCommand extends Command
 {
-    public function handle(): void
+    public function handle(): int
     {
-        $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $this->retrieveWebhooks());
-    }
 
-    public function retrieveWebhooks(): array
-    {
-        $return = [];
+        $webhooks = [];
+
+        $response = PaymayaFacade::connector()->send(new RetrieveWebhookRequest);
+
+        if ($response->status() === 404) {
+            // no webhooks found, return empty table
+        } elseif ($response->failed()) {
+
+            report($response->toException());
+
+            $this->error('Failed retrieve webhooks: '.$response->array('error') ?? 'unknown');
+
+            return self::FAILURE;
+        }
 
         /** @var array<string, WebhookDto> $webhookDtos */
-        $webhookDtos = PaymayaFacade::connector()->send(new RetrieveWebhookRequest)->dto();
+        $webhookDtos = $response->status() === 404 ? [] : $response->dto();
 
         foreach ($webhookDtos as $webhookDto) {
             /** @var WebhookDto $webhookDto */
-            $return[] = [
+            $webhooks[] = [
                 'id' => $webhookDto->id,
                 'name' => $webhookDto->name,
                 'callbackUrl' => $webhookDto->callbackUrl,
@@ -36,6 +45,8 @@ class RetrieveWebhookCommand extends Command
             ];
         }
 
-        return $return;
+        $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $webhooks);
+
+        return self::SUCCESS;
     }
 }
