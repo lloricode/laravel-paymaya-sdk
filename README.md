@@ -229,6 +229,10 @@ Sample usage of client mock
 https://docs.saloon.dev/the-basics/testing
 
 ```php
+    
+    use Lloricode\Paymaya\Requests\Checkout\CreateCheckoutRequest;
+    use Saloon\Http\Faking\MockClient;
+    use Saloon\Http\Faking\MockResponse;
 
     /**
      * @test
