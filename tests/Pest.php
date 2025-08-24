@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-use Illuminate\Support\Facades\Http;
 use Lloricode\LaravelPaymaya\Tests\TestCase;
+use Saloon\Config;
+use Saloon\Http\Faking\MockClient;
 
 uses(TestCase::class)
     ->beforeEach(function () {
-        Http::preventStrayRequests();
+        Config::preventStrayRequests();
+        MockClient::destroyGlobal();
 
         config([
             'paymaya-sdk.keys' => [
-                'public' => 'public-xxx',
-                'secret' => 'secret-xxx',
+                'public' => 'fake-publicKey',
+                'secret' => 'fake-secretKey',
             ],
         ]);
     })

@@ -4,38 +4,47 @@ declare(strict_types=1);
 
 namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
-use GuzzleHttp\Exception\ClientException;
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\Paymaya\Request\Checkout\Customization\Customization;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Customization\CustomizationDto;
+use Lloricode\Paymaya\Requests\Customization\RegisterCustomizationRequest;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'paymaya-sdk:customization:register', description: 'Register customization')]
 class RegisterCustomizationCommand extends Command
 {
-    public $signature = 'paymaya-sdk:customization:register';
-
-    public $description = 'Register customization';
-
-    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): int
     {
-        try {
-            PaymayaFacade::customization()
-                /** @phpstan-ignore argument.type */
-                ->register(new Customization(...config()->array('paymaya-sdk.checkout.customization')));
 
+        $response = PaymayaFacade::connector()->send(new RegisterCustomizationRequest(
+            new CustomizationDto(
+                logoUrl: config('paymaya-sdk.checkout.customization.logoUrl'),
+                iconUrl: config('paymaya-sdk.checkout.customization.iconUrl'),
+                appleTouchIconUrl: config('paymaya-sdk.checkout.customization.appleTouchIconUrl'),
+                customTitle: config('paymaya-sdk.checkout.customization.customTitle'),
+                colorScheme: config('paymaya-sdk.checkout.customization.colorScheme'),
+                redirectTimer: config('paymaya-sdk.checkout.customization.redirectTimer'),
+                hideReceiptInput: config('paymaya-sdk.checkout.customization.hideReceiptInput'),
+                skipResultPage: config('paymaya-sdk.checkout.customization.skipResultPage'),
+                showMerchantName: config('paymaya-sdk.checkout.customization.showMerchantName'),
+            )
+        ));
+
+        if ($response->successful()) {
             $this->info('Done registering customization');
-        } catch (ClientException $exception) {
-            $response = (array) json_decode((string) $exception->getResponse()->getBody(), true);
 
-            if (($response['message'] ?? null) === 'Missing/invalid parameters.') {
-                $this->error('Missing/invalid parameters.');
-                /** @phpstan-ignore-next-line  */
-                $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
-            }
-
-            return self::FAILURE;
+            return self::SUCCESS;
         }
 
-        return self::SUCCESS;
+        $response = $response->array();
+
+        if (($response['message'] ?? null) === 'Missing/invalid parameters.') {
+            $this->error('Missing/invalid parameters.');
+            /** @phpstan-ignore-next-line  */
+            $this->comment(json_encode($response['parameters'] ?? [], JSON_PRETTY_PRINT));
+        }
+
+        return self::FAILURE;
+
     }
 }

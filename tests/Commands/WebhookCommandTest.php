@@ -2,32 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Lloricode\LaravelPaymaya\Tests\Commands;
-
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RegisterWebHookCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RetrieveWebhookCommand;
-use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\Paymaya\Request\Webhook\Webhook;
+use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
+use Lloricode\Paymaya\Requests\Webhook\RegisterWebhookRequest;
+use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 
 use function Pest\Laravel\artisan;
 
 it('retrieve data', function () {
-    $handlerStack = HandlerStack::create(
-        new MockHandler(
-            [
-                new Response(
-                    200,
-                    [],
-                    json_encode([sampleWebhookData()]),
-                ),
-            ]
-        )
-    );
+    $sampleData = [sampleWebhookData()];
 
-    PaymayaFacade::client()->setHandlerStack($handlerStack);
+    MockClient::global([
+        RetrieveWebhookRequest::class => new MockResponse(body: $sampleData),
+    ]);
 
     artisan(RetrieveWebhookCommand::class)
         ->expectsTable(
@@ -38,82 +28,25 @@ it('retrieve data', function () {
                 'createdAt',
                 'updatedAt',
             ],
-            [sampleWebhookData()]
+            $sampleData
         )
-        ->assertExitCode(0);
+        ->assertSuccessful();
 });
 
 it(
     'register data',
     function () {
-        $handlerStack = HandlerStack::create(
-            new MockHandler(
-                [
-                    new Response( // retrieve
-                        200,
-                        [],
-                        json_encode(
-                            [
-                                sampleWebhookData(),
-                            ],
-                        ),
-                    ),
-                    new Response( // delete response
-                        200,
-                        [],
-                        json_encode(
-                            sampleWebhookData(
-                                [
-                                    'name' => Webhook::CHECKOUT_SUCCESS,
-                                    'id' => 'test-generated-id1',
-                                ]
-                            ),
-                        ),
-                    ),
-                    new Response(
-                        200,
-                        [],
-                        json_encode(
-                            sampleWebhookData(
-                                [
-                                    'name' => Webhook::CHECKOUT_SUCCESS,
-                                    'id' => 'test-generated-id1',
-                                ]
-                            ),
-                        ),
-                    ),
-                    new Response(
-                        200,
-                        [],
-                        json_encode(
-                            sampleWebhookData(
-                                [
-                                    'name' => Webhook::CHECKOUT_FAILURE,
-                                    'id' => 'test-generated-id2',
-                                ]
-                            ),
-                        ),
-                    ),
-                    new Response(
-                        200,
-                        [],
-                        json_encode(
-                            sampleWebhookData(
-                                [
-                                    'name' => Webhook::CHECKOUT_DROPOUT,
-                                    'id' => 'test-generated-id3',
-                                ]
-                            ),
-                        ),
-                    ),
-                ]
-            )
-        );
 
-        PaymayaFacade::client()->setHandlerStack($handlerStack);
+        $sampleData = [sampleWebhookData()];
+
+        MockClient::global([
+            RetrieveWebhookRequest::class => new MockResponse(body: $sampleData),
+            DeleteWebhookRequest::class => new MockResponse(status: 204),
+            RegisterWebhookRequest::class => new MockResponse(body: $sampleData),
+        ]);
 
         artisan(RegisterWebHookCommand::class)
             ->expectsOutput('Done registering webhooks')
-            ->assertExitCode(0);
+            ->assertSuccessful();
     }
 );

@@ -2,18 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Lloricode\LaravelPaymaya\Tests;
-
-use ErrorException;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
+use Lloricode\Paymaya\Requests\Checkout\SubmitCheckoutRequest;
+use Lloricode\Paymaya\Response\Checkout\CheckoutResponse;
 use Lloricode\Paymaya\Test\TestHelper;
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 
-use function PHPUnit\Framework\assertEquals;
+use function PHPUnit\Framework\assertSame;
 
 it(
     'success checkout',
@@ -21,39 +17,19 @@ it(
         $id = 'test-generated-id';
         $url = 'http://test';
 
-        $mock = new MockHandler(
-            [
-                new Response(
-                    200,
-                    [],
-                    json_encode(
-                        [
-                            'checkoutId' => $id,
-                            'redirectUrl' => $url,
-                        ]
-                    ),
-                ),
-            ]
-        );
+        MockClient::global([
+            SubmitCheckoutRequest::class => new MockResponse(
+                body: [
+                    'checkoutId' => $id,
+                    'redirectUrl' => $url,
+                ]
+            ),
+        ]);
 
-        $handlerStack = HandlerStack::create(
-            $mock
-        );
+        /** @var CheckoutResponse $checkoutResponse */
+        $checkoutResponse = PaymayaFacade::connector()->send(new SubmitCheckoutRequest(TestHelper::buildCheckout()))->dto();
 
-        PaymayaFacade::client()->setHandlerStack($handlerStack);
-
-        try {
-            $checkoutResponse = PaymayaFacade::checkout()->execute(TestHelper::buildCheckout());
-            //            $checkoutResponse = CheckoutFacade::execute(TestHelper::buildCheckout());
-        } catch (ErrorException) {
-            $this->fail('ErrorException');
-        } catch (ClientException $e) {
-            $this->fail('ClientException: '.$e->getMessage().$e->getResponse()->getBody());
-        } catch (GuzzleException) {
-            $this->fail('GuzzleException');
-        }
-
-        assertEquals($id, $checkoutResponse->checkoutId);
-        assertEquals($url, $checkoutResponse->redirectUrl);
+        assertSame($id, $checkoutResponse->checkoutId);
+        assertSame($url, $checkoutResponse->redirectUrl);
     }
 );

@@ -2,21 +2,19 @@
 
 declare(strict_types=1);
 
-use Lloricode\Paymaya\PaymayaClient;
-use Lloricode\Paymaya\Request\Webhook\Webhook;
+use Lloricode\Paymaya\Enums\Environment;
+use Lloricode\Paymaya\Enums\Webhook;
 
 /**
  * @todo: Manage Exception using laravel logs, allow set config log files
  */
 
 return [
-    'mode' => env('PAYMAYA_MODE', PaymayaClient::ENVIRONMENT_SANDBOX),
+    'mode' => env('PAYMAYA_MODE', Environment::sandbox->value),
     'keys' => [
         'public' => env('PAYMAYA_PUBLIC_KEY'),
         'secret' => env('PAYMAYA_SECRET_KEY'),
     ],
-
-    'timeout' => 3,
 
     /**
      * Webhooks
@@ -39,6 +37,9 @@ return [
             'customTitle' => 'test paymaya sandbox title',
             'colorScheme' => '#e01c44',
             'redirectTimer' => 3,
+            //            'hideReceiptInput' => true,
+            //            'skipResultPage' => false,
+            //            'showMerchantName' => true,
         ],
     ],
 ];

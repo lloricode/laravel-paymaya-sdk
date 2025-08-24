@@ -2,19 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Lloricode\LaravelPaymaya\Tests\Commands;
-
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Response;
 use Lloricode\LaravelPaymaya\Commands\Customization\DeleteCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
-use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
+use Lloricode\Paymaya\Requests\Customization\DeleteCustomizationRequest;
+use Lloricode\Paymaya\Requests\Customization\RegisterCustomizationRequest;
+use Lloricode\Paymaya\Requests\Customization\RetrieveCustomizationRequest;
+use Saloon\Http\Faking\MockClient;
+use Saloon\Http\Faking\MockResponse;
 
 use function Pest\Laravel\artisan;
-use function PHPUnit\Framework\assertCount;
-use function PHPUnit\Framework\assertEquals;
 
 it('retrieve data', function () {
     $data = [
@@ -29,19 +26,9 @@ it('retrieve data', function () {
         'showMerchantName' => true,
     ];
 
-    $handlerStack = HandlerStack::create(
-        new MockHandler(
-            [
-                new Response(
-                    200,
-                    [],
-                    json_encode($data),
-                ),
-            ]
-        )
-    );
-
-    PaymayaFacade::client()->setHandlerStack($handlerStack);
+    MockClient::global([
+        RetrieveCustomizationRequest::class => new MockResponse(body: $data),
+    ]);
 
     $rows = [];
 
@@ -51,7 +38,7 @@ it('retrieve data', function () {
 
     artisan(RetrieveCustomizationCommand::class)
         ->expectsTable(['Field', 'Value'], $rows)
-        ->assertExitCode(0);
+        ->assertSuccessful();
 });
 
 it('register data', function () {
@@ -65,47 +52,27 @@ it('register data', function () {
 
     config(['paymaya-sdk.checkout.customization' => $data]);
 
-    $handlerStack = HandlerStack::create(
-        new MockHandler(
-            [
-                new Response(
-                    200,
-                    [],
-                    json_encode($data),
-                ),
-            ]
-        )
-    );
-
-    $history = [];
-
-    PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
+    $mockClient = MockClient::global([
+        RegisterCustomizationRequest::class => new MockResponse(body: $data),
+    ]);
 
     artisan(RegisterCustomizationCommand::class)
         ->expectsOutput('Done registering customization')
-        ->assertExitCode(0);
+        ->assertSuccessful();
 
-    assertCount(1, $history);
+    $mockClient->assertSentCount(1);
 
-    /** @var \GuzzleHttp\Psr7\Response $response */
-    $response = $history[0]['response'];
-
-    assertEquals(200, $response->getStatusCode());
-
-    // TODO: missing response but working ok
-    //        $this->assertEquals(json_encode($data), $response->getBody()->getContents());
 });
 
 it('handle invalid parameter', function () {
-    $data = [
+
+    config(['paymaya-sdk.checkout.customization' => [
         'logoUrl' => 'http://image1',
         'iconUrl' => 'http://image2',
         'appleTouchIconUrl' => 'http://image3',
         'customTitle' => 'test title',
         'colorScheme' => '1234',
-    ];
-
-    config(['paymaya-sdk.checkout.customization' => $data]);
+    ]]);
 
     $responseError = '{
     "code": "2553",
@@ -126,52 +93,28 @@ it('handle invalid parameter', function () {
     ]
 }';
 
-    $handlerStack = HandlerStack::create(
-        new MockHandler(
-            [
-                new Response(
-                    400,
-                    [],
-                    $responseError,
-                ),
-            ]
-        )
-    );
-
-    $history = [];
+    $mockClient = MockClient::global([
+        RegisterCustomizationRequest::class => new MockResponse(body: $responseError, status: 400),
+    ]);
 
     $errorArray = (array) json_decode($responseError, true);
-
-    PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
 
     artisan(RegisterCustomizationCommand::class)
         ->expectsOutput('Missing/invalid parameters.')
         ->expectsOutput(json_encode($errorArray['parameters'], JSON_PRETTY_PRINT))
-        ->assertExitCode(1);
+        ->assertFailed();
+
 });
 
-it('delete_data', function () {
-    $handlerStack = HandlerStack::create(
-        new MockHandler(
-            [
-                new Response(
-                    204
-                ),
-            ]
-        )
-    );
+it('delete data', function () {
 
-    $history = [];
-
-    PaymayaFacade::client()->setHandlerStack($handlerStack, $history);
+    $mockClient = MockClient::global([
+        DeleteCustomizationRequest::class => new MockResponse(status: 204),
+    ]);
 
     artisan(DeleteCustomizationCommand::class)
         ->expectsOutput('Done deleting customization')
-        ->assertExitCode(0);
+        ->assertSuccessful();
 
-    /** @var \GuzzleHttp\Psr7\Response $response */
-    $response = $history[0]['response'];
-
-    assertCount(1, $history);
-    assertEquals(204, $response->getStatusCode());
+    $mockClient->assertSentCount(1);
 });

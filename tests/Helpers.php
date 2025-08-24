@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Lloricode\Paymaya\Request\Webhook\Webhook;
+use Lloricode\Paymaya\Enums\Webhook;
 
 function sampleWebhookData(array $override = []): array
 {

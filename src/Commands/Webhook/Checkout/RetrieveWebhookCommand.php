@@ -6,31 +6,33 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
+use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
+use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'paymaya-sdk:webhook:retrieve', description: 'Retrieve registered webhooks')]
 class RetrieveWebhookCommand extends Command
 {
-    public $signature = 'paymaya-sdk:webhook:retrieve';
-
-    public $description = 'Retrieve registered webhooks';
-
-    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): void
     {
         $this->table(['id', 'name', 'callbackUrl', 'createdAt', 'updatedAt'], $this->retrieveWebhooks());
     }
 
-    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function retrieveWebhooks(): array
     {
         $return = [];
 
-        foreach (PaymayaFacade::webhook()->retrieve() as $webhookResponse) {
+        /** @var array<string, WebhookDto> $webhookDtos */
+        $webhookDtos = PaymayaFacade::connector()->send(new RetrieveWebhookRequest)->dto();
+
+        foreach ($webhookDtos as $webhookDto) {
+            /** @var WebhookDto $webhookDto */
             $return[] = [
-                'id' => $webhookResponse->id,
-                'name' => $webhookResponse->name,
-                'callbackUrl' => $webhookResponse->callbackUrl,
-                'createdAt' => $webhookResponse->createdAt,
-                'updatedAt' => $webhookResponse->updatedAt,
+                'id' => $webhookDto->id,
+                'name' => $webhookDto->name,
+                'callbackUrl' => $webhookDto->callbackUrl,
+                'createdAt' => $webhookDto->createdAt,
+                'updatedAt' => $webhookDto->updatedAt,
             ];
         }
 

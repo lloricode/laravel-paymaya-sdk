@@ -22,7 +22,7 @@
         "php": "^8.3",
         "ext-json": "*",
         "illuminate/contracts": "^11.0|^12.0",
-        "lloricode/paymaya-sdk-php": "^2.0.0",
+        "lloricode/paymaya-sdk-php": "dev-saloon",
         "spatie/laravel-package-tools": "^1.16.2"
     },
     "require-dev": {
@@ -71,11 +71,7 @@
                 "Lloricode\\LaravelPaymaya\\LaravelPaymayaServiceProvider"
             ],
             "aliases": {
-                "PaymayaSDKCheckoutClient": "Lloricode\\LaravelPaymaya\\Facades\\CheckoutFacade",
-                "PaymayaSDKClient": "Lloricode\\LaravelPaymaya\\Facades\\ClientFacade",
-                "PaymayaSDKCustomizationClient": "Lloricode\\LaravelPaymaya\\Facades\\CustomizationFacade",
-                "PaymayaSDK": "Lloricode\\LaravelPaymaya\\Facades\\PaymayaFacade",
-                "PaymayaSDKWebhhokClient": "Lloricode\\LaravelPaymaya\\Facades\\WebhookFacade"
+                "PaymayaSDK": "Lloricode\\LaravelPaymaya\\Facades\\PaymayaFacade"
             }
         }
     },

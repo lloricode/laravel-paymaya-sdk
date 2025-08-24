@@ -6,27 +6,42 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook\Checkout;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\Paymaya\Request\Webhook\Webhook;
+use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
+use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
+use Lloricode\Paymaya\Requests\Webhook\RegisterWebhookRequest;
+use Lloricode\Paymaya\Requests\Webhook\RetrieveWebhookRequest;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'paymaya-sdk:webhook:register', description: 'Register webhook')]
 class RegisterWebHookCommand extends Command
 {
-    public $signature = 'paymaya-sdk:webhook:register';
-
-    public $description = 'Register webhook';
-
-    /** @throws \GuzzleHttp\Exception\GuzzleException*/
     public function handle(): void
     {
-        PaymayaFacade::webhook()->deleteAll();
+        try {
+            /** @var array<string, WebhookDto> $webhooks */
+            $webhooks = PaymayaFacade::connector()->send(new RetrieveWebhookRequest)->dto();
+        } catch (\Exception $e) {
+            $webhooks = [];
+        }
+
+        foreach ($webhooks as $webhook) {
+
+            if ($webhook->id === null) {
+                continue;
+            }
+
+            PaymayaFacade::connector()->send(new DeleteWebhookRequest($webhook->id));
+        }
 
         foreach (config()->array('paymaya-sdk.webhooks') as $name => $url) {
-            PaymayaFacade::webhook()
-                ->register(
-                    (new Webhook)
-                        ->setName($name)
-                        /** @phpstan-ignore-next-line  */
-                        ->setCallbackUrl(url($url))
-                );
+
+            /** @var string $url */
+            PaymayaFacade::connector()->send(new RegisterWebhookRequest(
+                new WebhookDto(
+                    name: $name,
+                    callbackUrl: url($url),
+                )
+            ));
         }
 
         $this->info('Done registering webhooks');

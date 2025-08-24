@@ -6,17 +6,15 @@ namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
+use Lloricode\Paymaya\Requests\Customization\DeleteCustomizationRequest;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'paymaya-sdk:customization:delete', description: 'Delete registered customization')]
 class DeleteCustomizationCommand extends Command
 {
-    public $signature = 'paymaya-sdk:customization:delete';
-
-    public $description = 'Delete registered customization';
-
-    /** @throws \GuzzleHttp\Exception\GuzzleException */
     public function handle(): int
     {
-        PaymayaFacade::customization()->delete();
+        PaymayaFacade::connector()->send(new DeleteCustomizationRequest);
 
         $this->info('Done deleting customization');
 

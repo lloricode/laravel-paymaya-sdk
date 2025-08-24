@@ -9,7 +9,8 @@ use Lloricode\LaravelPaymaya\Commands\Customization\RegisterCustomizationCommand
 use Lloricode\LaravelPaymaya\Commands\Customization\RetrieveCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RegisterWebHookCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\Checkout\RetrieveWebhookCommand;
-use Lloricode\Paymaya\PaymayaClient;
+use Lloricode\Paymaya\Enums\Environment;
+use Lloricode\Paymaya\PaymayaConnector;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -31,17 +32,15 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
             );
     }
 
-    /** @return void */
     public function packageRegistered(): void
     {
         $this->app->singleton(
-            PaymayaClient::class,
-            fn () => (new PaymayaClient(
-                config()->string('paymaya-sdk.keys.secret'),
-                config()->string('paymaya-sdk.keys.public'),
-                config()->string('paymaya-sdk.mode'),
-            ))
-                ->setTimeout(config()->integer('paymaya-sdk.timeout', 3))
+            PaymayaConnector::class,
+            fn () => new PaymayaConnector(
+                environment: Environment::from(config()->string('paymaya-sdk.mode')),
+                secretKey: config()->string('paymaya-sdk.keys.secret'),
+                publicKey: config()->string('paymaya-sdk.keys.public'),
+            )
         );
     }
 }
