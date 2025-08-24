@@ -96,8 +96,8 @@ use Lloricode\Paymaya\DataTransferObjects\Checkout\ItemDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\MetaDataDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\RedirectUrlDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\TotalAmountDto;
-use Lloricode\Paymaya\Requests\Checkout\RetrieveCheckoutRequest;
-use Lloricode\Paymaya\Requests\Checkout\SubmitCheckoutRequest;
+use Lloricode\Paymaya\Requests\Checkout\CreateCheckoutRequest;
+use Lloricode\Paymaya\Requests\Checkout\GetCheckoutRequest;
 
 $api = PaymayaFacade::connector();
 
@@ -187,13 +187,14 @@ $checkout = new CheckoutDto(
 );
 
 // submit
-$checkoutResponse = $api->send(new SubmitCheckoutRequest($checkout))->dto();
+$checkoutResponse = $api->send(new CreateCheckoutRequest($checkout))->dto();
 
 echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
 
 // retrieve
-$api->send(new RetrieveCheckoutRequest($checkoutResponse->checkoutId))->dto();
+$api->send(new GetCheckoutRequest($checkoutResponse->checkoutId))->dto();
+
 
 ```
 
