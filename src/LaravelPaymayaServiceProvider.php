@@ -32,7 +32,7 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
     }
 
     /** @return void */
-    public function packageRegistered()
+    public function packageRegistered(): void
     {
         $this->app->singleton(
             PaymayaClient::class,
