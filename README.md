@@ -15,7 +15,7 @@ Paymaya SDK for laravel, it uses [lloricode/paymaya-sdk-php](https://github.com/
 - [Usage](#usage)
     - [Checkout](#checkout)
     - [Webhooks](#webhook)
-    - [Testing with Guzzle Mock](#testing-with-guzzle-mock)
+    - [Testing with Saloon Client Mock](#testing-with-saloon-client-mock)
 
 ## Installation
 
