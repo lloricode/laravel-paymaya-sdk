@@ -3,7 +3,6 @@
 declare(strict_types=1);
 
 return Rector\Config\RectorConfig::configure()
-    ->withParallel(maxNumberOfProcess: 6)
     ->withPhpSets()
     ->withPaths([
         __DIR__.'/src',

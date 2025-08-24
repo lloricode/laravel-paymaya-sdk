@@ -10,6 +10,8 @@
         "declare_strict_types": true,
         "single_trait_insert_per_statement": true,
         "strict_comparison":  true,
-        "strict_param":  true
+        "strict_param":  true,
+        "blank_line_before_statement": true,
+        "method_argument_space": true
     }
 }
