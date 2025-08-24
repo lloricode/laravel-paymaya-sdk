@@ -83,118 +83,118 @@ You can copy the sample to test it.
 https://developers.paymaya.com/blog/entry/paymaya-checkout-api-overview
 
 ``` php
-use Carbon\Carbon;
-use Lloricode\Paymaya\Request\Checkout\Amount\AmountDetail;
-use Lloricode\Paymaya\Request\Checkout\Amount\Amount;
-use Lloricode\Paymaya\Request\Checkout\Buyer\BillingAddress;
-use Lloricode\Paymaya\Request\Checkout\Buyer\Buyer;
-use Lloricode\Paymaya\Request\Checkout\Buyer\Contact;
-use Lloricode\Paymaya\Request\Checkout\Buyer\ShippingAddress;
-use Lloricode\Paymaya\Request\Checkout\Checkout;
-use Lloricode\Paymaya\Request\Checkout\Item;
-use Lloricode\Paymaya\Request\Checkout\MetaData;
-use Lloricode\Paymaya\Request\Checkout\RedirectUrl;
-use Lloricode\Paymaya\Request\Checkout\TotalAmount;
-use PaymayaSDK;
 
-$checkout = (new Checkout())
-    ->setTotalAmount(
-        (new TotalAmount())
-            ->setValue(100)
-            ->setDetails(
-                (new AmountDetail())
-                    ->setSubtotal(100)
-            )
-    )
-    ->setBuyer(
-        (new Buyer())
-            ->setFirstName('John')
-            ->setMiddleName('Paul')
-            ->setLastName('Doe')
-            ->setBirthday(Carbon::parse('1995-10-24'))
-            ->setCustomerSince(Carbon::parse('1995-10-24'))
-            ->setGender('M')
-            ->setContact(
-                (new Contact())
-                    ->setPhone('+639181008888')
-                    ->setEmail('merchant@merchantsite.com')
-            )
-            ->setShippingAddress(
-                (new ShippingAddress())
-                    ->setFirstName('John')
-                    ->setMiddleName('Paul')
-                    ->setLastName('Doe')
-                    ->setPhone('+639181008888')
-                    ->setEmail('merchant@merchantsite.com')
-                    ->setLine1('6F Launchpad')
-                    ->setLine2('Reliance Street')
-                    ->setCity('Mandaluyong City')
-                    ->setState('Metro Manila')
-                    ->setZipCode('1552')
-                    ->setCountryCode('PH')
-                    ->setShippingType('ST')
-            )
-            ->setBillingAddress(
-                (new BillingAddress())
-                    ->setLine1('6F Launchpad')
-                    ->setLine2('Reliance Street')
-                    ->setCity('Mandaluyong City')
-                    ->setState('Metro Manila')
-                    ->setZipCode('1552')
-                    ->setCountryCode('PH')
-            )
-    )
-    ->addItem(
-        (new Item())
-            ->setName('Canvas Slip Ons')
-            ->setQuantity(1)
-            ->setCode('CVG-096732')
-            ->setDescription('Shoes')
-            ->setAmount(
-                (new Amount())
-                    ->setValue(100)
-                    ->setDetails(
-                        (new AmountDetail())
-                            ->setDiscount(0)
-                            ->setServiceCharge(0)
-                            ->setShippingFee(0)
-                            ->setTax(0)
-                            ->setSubtotal(100)
-                    )
-            )
-            ->setTotalAmount(
-                (new Amount())
-                    ->setValue(100)
-                    ->setDetails(
-                        (new AmountDetail())
-                            ->setDiscount(0)
-                            ->setServiceCharge(0)
-                            ->setShippingFee(0)
-                            ->setTax(0)
-                            ->setSubtotal(100)
-                    )
-            )
-    )
-    ->setRedirectUrl(
-        (new RedirectUrl())
-            ->setSuccess('https://www.merchantsite.com/success')
-            ->setFailure('https://www.merchantsite.com/failure')
-            ->setCancel('https://www.merchantsite.com/cancel')
-    )->setRequestReferenceNumber('1551191039')
-    ->setMetadata(
-        (new MetaData())
-            ->setSMI('smi')
-            ->setSMN('smn')
-            ->setMCI('mci')
-            ->setMPC('mpc')
-            ->setMCO('mco')
-            ->setMST('mst')
-    );
+use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Amount\AmountDetailDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Amount\AmountDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Buyer\BillingAddressDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Buyer\BuyerDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Buyer\ContactDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\Buyer\ShippingAddressDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\CheckoutDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\ItemDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\MetaDataDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\RedirectUrlDto;
+use Lloricode\Paymaya\DataTransferObjects\Checkout\TotalAmountDto;
+use Lloricode\Paymaya\Requests\Checkout\RetrieveCheckoutRequest;
+use Lloricode\Paymaya\Requests\Checkout\SubmitCheckoutRequest;
 
-$checkoutResponse = PaymayaSDK::checkout()->execute($checkout);
+$api = PaymayaFacade::connector();
+
+$checkout = new CheckoutDto(
+    totalAmount: new TotalAmountDto(
+        value: 100,
+        details: new AmountDetailDto(
+            subtotal: 100
+        )
+    ),
+    buyer: new BuyerDto(
+        firstName: 'John',
+        middleName: 'Paul',
+        lastName: 'Doe',
+        birthday: '1995-10-24',
+        customerSince: '1995-10-24',
+        gender: 'M',
+        contact: new ContactDto(
+            phone: '+639181008888',
+            email: 'merchant@merchantsite.com'
+        ),
+        shippingAddress: new ShippingAddressDto(
+            firstName: 'John',
+            middleName: 'Paul',
+            lastName: 'Doe',
+            phone: '+639181008888',
+            email: 'merchant@merchantsite.com',
+            line1: '6F Launchpad',
+            line2: 'Reliance Street',
+            city: 'Mandaluyong City',
+            state: 'Metro Manila',
+            zipCode: '1552',
+            countryCode: 'PH',
+            shippingType: 'ST'
+        ),
+        billingAddress: new BillingAddressDto(
+            line1: '6F Launchpad',
+            line2: 'Reliance Street',
+            city: 'Mandaluyong City',
+            state: 'Metro Manila',
+            zipCode: '1552',
+            countryCode: 'PH'
+        )
+    ),
+    items: [
+        new ItemDto(
+            name: 'Canvas Slip Ons',
+            quantity: 1,
+            code: 'CVG-096732',
+            description: 'Shoes',
+            amount: new AmountDto(
+                value: 100,
+                details: new AmountDetailDto(
+                    discount: 0,
+                    serviceCharge: 0,
+                    shippingFee: 0,
+                    tax: 0,
+                    subtotal: 100
+                )
+            ),
+            totalAmount: new AmountDto(
+                value: 100,
+                details: new AmountDetailDto(
+                    discount: 0,
+                    serviceCharge: 0,
+                    shippingFee: 0,
+                    tax: 0,
+                    subtotal: 100
+                )
+            )
+        ),
+    ],
+    redirectUrl: new RedirectUrlDto(
+        success: 'https://www.merchantsite.com/success',
+        failure: 'https://www.merchantsite.com/failure',
+        cancel: 'https://www.merchantsite.com/cancel'
+    ),
+    requestReferenceNumber: '1551191039',
+    metadata: new MetaDataDto(
+        smi: 'smi',
+        smn: 'smn',
+        mci: 'mci',
+        mpc: 'mpc',
+        mco: 'mco',
+        mst: 'mst'
+    )
+);
+
+// submit
+$checkoutResponse = $api->send(new SubmitCheckoutRequest($checkout))->dto();
 
 echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
+
+// retrieve
+$api->send(new RetrieveCheckoutRequest($checkoutResponse->checkoutId))->dto();
+
 ```
 
 ### Webhook
