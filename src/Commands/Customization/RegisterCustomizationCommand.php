@@ -50,7 +50,7 @@ class RegisterCustomizationCommand extends Command
 
         report($response->toException());
 
-        $this->error('Failed registering customization: '.$response->array('error') ?? 'unknown');
+        $this->error('Failed registering customization: '.$response->array('error', 'unknown'));
 
         return self::FAILURE;
     }

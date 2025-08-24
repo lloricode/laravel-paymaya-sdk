@@ -37,3 +37,14 @@ it('handle invalid credentials', function () {
         ->expectsOutput('Failed registering webhooks: '.$errorMessage)
         ->assertFailed();
 });
+
+it('handle unknow error', function () {
+
+    MockClient::global([
+        RetrieveWebhookRequest::class => new MockResponse(status: 500),
+    ]);
+
+    artisan(RegisterWebHookCommand::class)
+        ->expectsOutput('Failed registering webhooks: unknown')
+        ->assertFailed();
+});

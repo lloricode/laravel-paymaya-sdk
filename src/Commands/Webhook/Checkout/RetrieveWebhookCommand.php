@@ -26,7 +26,7 @@ class RetrieveWebhookCommand extends Command
 
             report($response->toException());
 
-            $this->error('Failed retrieve webhooks: '.$response->array('error') ?? 'unknown');
+            $this->error('Failed retrieve webhooks: '.$response->array('error', 'unknown'));
 
             return self::FAILURE;
         }

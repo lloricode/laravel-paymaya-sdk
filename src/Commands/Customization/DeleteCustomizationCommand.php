@@ -24,7 +24,7 @@ class DeleteCustomizationCommand extends Command
 
         report($response->toException());
 
-        $this->error('Failed deleting customization: '.$response->array('error') ?? 'unknown');
+        $this->error('Failed deleting customization: '.$response->array('error', 'unknown'));
 
         return self::FAILURE;
     }

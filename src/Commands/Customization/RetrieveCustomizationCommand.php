@@ -21,7 +21,7 @@ class RetrieveCustomizationCommand extends Command
         } elseif ($response->failed()) {
             report($response->toException());
 
-            $this->error('Failed retrieve customization: '.$response->array('error') ?? 'unknown');
+            $this->error('Failed retrieve customization: '.$response->array('error', 'unknown'));
 
             return self::FAILURE;
         }
