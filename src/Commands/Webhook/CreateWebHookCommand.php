@@ -26,7 +26,9 @@ class CreateWebHookCommand extends Command
 
             $response->throw();
 
+            // @codeCoverageIgnoreStart
             return self::FAILURE;
+            // @codeCoverageIgnoreEnd
         }
 
         /** @var array<string, WebhookDto> $webhooks */
@@ -34,11 +36,10 @@ class CreateWebHookCommand extends Command
 
         foreach ($webhooks as $webhook) {
 
-            if ($webhook->id === null) {
-                continue;
-            }
+            /** @var string $id */
+            $id = $webhook->id;
 
-            PaymayaFacade::connector()->send(new DeleteWebhookRequest($webhook->id));
+            PaymayaFacade::connector()->send(new DeleteWebhookRequest($id));
         }
 
         foreach (config()->array('paymaya-sdk.webhooks') as $name => $url) {

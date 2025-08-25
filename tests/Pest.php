@@ -13,7 +13,7 @@ uses(TestCase::class)
         MockClient::destroyGlobal();
 
         config([
-            'paymaya-sdk.mode' => Environment::sandbox->value,
+            'paymaya-sdk.mode' => Environment::Sandbox->value,
             'paymaya-sdk.keys' => [
                 'public' => 'fake-publicKey',
                 'secret' => 'fake-secretKey',

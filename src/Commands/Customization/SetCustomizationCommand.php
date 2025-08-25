@@ -37,6 +37,8 @@ class SetCustomizationCommand extends Command
 
         $response->throw();
 
+        // @codeCoverageIgnoreStart
         return self::FAILURE;
+        // @codeCoverageIgnoreEnd
     }
 }

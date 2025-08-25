@@ -25,7 +25,9 @@ class GetAllWebhookCommand extends Command
         } elseif ($response->failed()) {
             $response->throw();
 
+            // @codeCoverageIgnoreStart
             return self::FAILURE;
+            // @codeCoverageIgnoreEnd
         }
 
         /** @var array<string, WebhookDto> $webhookDtos */

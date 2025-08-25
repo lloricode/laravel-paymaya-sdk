@@ -24,6 +24,8 @@ class RemoveCustomizationCommand extends Command
 
         $response->throw();
 
+        // @codeCoverageIgnoreStart
         return self::FAILURE;
+        // @codeCoverageIgnoreEnd
     }
 }

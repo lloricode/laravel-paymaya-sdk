@@ -22,7 +22,9 @@ class RetrieveCustomizationCommand extends Command
 
             $response->throw();
 
+            // @codeCoverageIgnoreStart
             return self::FAILURE;
+            // @codeCoverageIgnoreEnd
         }
 
         $arrayData = $response->status() === 404 ? [] : $response->array();
