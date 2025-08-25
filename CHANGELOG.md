@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v3.0.0 - 2025-08-25
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/lloricode/laravel-paymaya-sdk/pull/18
+* Bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot[bot] in https://github.com/lloricode/laravel-paymaya-sdk/pull/20
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/lloricode/laravel-paymaya-sdk/pull/21
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/lloricode/laravel-paymaya-sdk/pull/22
+* Saloon by @lloricode in https://github.com/lloricode/laravel-paymaya-sdk/pull/23
+
+### New Contributors
+
+* @lloricode made their first contribution in https://github.com/lloricode/laravel-paymaya-sdk/pull/23
+
+**Full Changelog**: https://github.com/lloricode/laravel-paymaya-sdk/compare/v2.0.2...v3.0.0
+
 ## v2.0.2 - 2025-02-21
 
 ### What's Changed
