@@ -87,8 +87,7 @@ return [
 You can copy the sample to test it.
 
 ### Checkout
-
-https://developers.paymaya.com/blog/entry/paymaya-checkout-api-overview
+https://developers.maya.ph/reference/createv1checkout
 
 ``` php
 
@@ -207,7 +206,7 @@ $api->send(new GetCheckoutRequest($checkoutResponse->checkoutId))->dto();
 ```
 
 ### Webhook
-
+https://developers.maya.ph/reference/createv1webhook-1
 ```
 # see config `paymaya-sdk.webhooks` array to set your webhooks,
 # then run this to create webhooks.
