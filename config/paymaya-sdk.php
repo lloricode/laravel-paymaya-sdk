@@ -10,7 +10,7 @@ use Lloricode\Paymaya\Enums\Webhook;
  */
 
 return [
-    'mode' => env('PAYMAYA_MODE', Environment::sandbox->value),
+    'mode' => env('PAYMAYA_MODE', Environment::Sandbox->value),
     'keys' => [
         'public' => env('PAYMAYA_PUBLIC_KEY'),
         'secret' => env('PAYMAYA_SECRET_KEY'),
