@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\Requests\Checkout\CreateCheckoutRequest;
-use Lloricode\Paymaya\Response\Checkout\CheckoutResponse;
 use Lloricode\Paymaya\Test\TestHelper;
 use Saloon\Http\Faking\MockClient;
 use Saloon\Http\Faking\MockResponse;
@@ -26,8 +25,7 @@ it(
             ),
         ]);
 
-        /** @var CheckoutResponse $checkoutResponse */
-        $checkoutResponse = PaymayaFacade::connector()->send(new CreateCheckoutRequest(TestHelper::buildCheckout()))->dto();
+        $checkoutResponse = PaymayaFacade::createCheckout(TestHelper::buildCheckout());
 
         assertSame($id, $checkoutResponse->checkoutId);
         assertSame($url, $checkoutResponse->redirectUrl);

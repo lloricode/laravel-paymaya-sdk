@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Lloricode\LaravelPaymaya\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Lloricode\LaravelPaymaya\LaravelPaymaya;
+use Lloricode\Paymaya\Paymaya;
 
 /**
- * @mixin \Lloricode\LaravelPaymaya\LaravelPaymaya
+ * @mixin \Lloricode\Paymaya\Paymaya
  */
 class PaymayaFacade extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return LaravelPaymaya::class;
+        return Paymaya::class;
     }
 }

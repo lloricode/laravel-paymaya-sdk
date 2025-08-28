@@ -7,9 +7,6 @@ namespace Lloricode\LaravelPaymaya\Commands\Webhook;
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\DataTransferObjects\Webhook\WebhookDto;
-use Lloricode\Paymaya\Requests\Webhook\CreateWebhookRequest;
-use Lloricode\Paymaya\Requests\Webhook\DeleteWebhookRequest;
-use Lloricode\Paymaya\Requests\Webhook\GetAllWebhookRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'paymaya-sdk:webhook:create', description: 'Create webhook')]
@@ -17,42 +14,34 @@ class CreateWebHookCommand extends Command
 {
     public function handle(): int
     {
-
-        $response = PaymayaFacade::connector()->send(new GetAllWebhookRequest);
-
-        if ($response->status() === 404) {
-            //
-        } elseif ($response->failed()) {
-
-            $response->throw();
-
-            // @codeCoverageIgnoreStart
-            return self::FAILURE;
-            // @codeCoverageIgnoreEnd
+        try {
+            $webhookDtos = PaymayaFacade::webhooks();
+        } catch (\Saloon\Exceptions\Request\RequestException $e) {
+            if ($e->getStatus() === 404) {
+                $webhookDtos = [];
+            } else {
+                throw $e;
+            }
         }
 
-        /** @var array<string, WebhookDto> $webhooks */
-        $webhooks = $response->status() === 404 ? [] : $response->dto();
-
-        foreach ($webhooks as $webhook) {
+        foreach ($webhookDtos as $webhookDto) {
 
             /** @var string $id */
-            $id = $webhook->id;
+            $id = $webhookDto->id;
 
-            PaymayaFacade::connector()->send(new DeleteWebhookRequest($id));
+            PaymayaFacade::deleteWebhook($id);
         }
 
         foreach (config()->array('paymaya-sdk.webhooks') as $name => $url) {
-
+            /** @var string $name */
             /** @var string $url */
-            $response = PaymayaFacade::connector()->send(new CreateWebhookRequest(
+            PaymayaFacade::createWebhook(
                 new WebhookDto(
                     name: $name,
                     callbackUrl: url($url),
                 )
-            ));
+            );
 
-            $response->throw();
         }
 
         $this->info('Done registering webhooks');

@@ -6,7 +6,6 @@ namespace Lloricode\LaravelPaymaya\Commands\Customization;
 
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
-use Lloricode\Paymaya\Requests\Customization\RetrieveCustomizationRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'paymaya-sdk:customization:retrieve', description: 'Retrieve customization')]
@@ -14,20 +13,15 @@ class RetrieveCustomizationCommand extends Command
 {
     public function handle(): int
     {
-        $response = PaymayaFacade::connector()->send(new RetrieveCustomizationRequest);
-
-        if ($response->status() === 404) {
-            //
-        } elseif ($response->failed()) {
-
-            $response->throw();
-
-            // @codeCoverageIgnoreStart
-            return self::FAILURE;
-            // @codeCoverageIgnoreEnd
+        try {
+            $arrayData = PaymayaFacade::customizations();
+        } catch (\Saloon\Exceptions\Request\RequestException $e) {
+            if ($e->getStatus() === 404) {
+                $arrayData = [];
+            } else {
+                throw $e;
+            }
         }
-
-        $arrayData = $response->status() === 404 ? [] : $response->array();
 
         $rows = [];
 
@@ -43,7 +37,7 @@ class RetrieveCustomizationCommand extends Command
             'showMerchantName',
         ] as $field) {
 
-            $value = $arrayData[$field] ?? null;
+            $value = $arrayData->$field ?? null;
 
             $rows[] = [$field, is_bool($value) ? ($value ? 'true' : 'false') : $value];
         }

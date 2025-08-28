@@ -10,7 +10,7 @@ use Lloricode\LaravelPaymaya\Commands\Customization\SetCustomizationCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\CreateWebHookCommand;
 use Lloricode\LaravelPaymaya\Commands\Webhook\GetAllWebhookCommand;
 use Lloricode\Paymaya\Enums\Environment;
-use Lloricode\Paymaya\PaymayaConnector;
+use Lloricode\Paymaya\Paymaya;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -35,8 +35,8 @@ class LaravelPaymayaServiceProvider extends PackageServiceProvider
     public function packageRegistered(): void
     {
         $this->app->singleton(
-            PaymayaConnector::class,
-            fn () => new PaymayaConnector(
+            Paymaya::class,
+            fn () => new Paymaya(
                 environment: Environment::from(config()->string('paymaya-sdk.mode')),
                 secretKey: config()->string('paymaya-sdk.keys.secret'),
                 publicKey: config()->string('paymaya-sdk.keys.public'),

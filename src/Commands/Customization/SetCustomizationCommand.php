@@ -7,7 +7,6 @@ namespace Lloricode\LaravelPaymaya\Commands\Customization;
 use Illuminate\Console\Command;
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\Customization\CustomizationDto;
-use Lloricode\Paymaya\Requests\Customization\SetCustomizationRequest;
 use Symfony\Component\Console\Attribute\AsCommand;
 
 #[AsCommand(name: 'paymaya-sdk:customization:set', description: 'Set customization')]
@@ -15,7 +14,7 @@ class SetCustomizationCommand extends Command
 {
     public function handle(): int
     {
-        $response = PaymayaFacade::connector()->send(new SetCustomizationRequest(
+        PaymayaFacade::createCustomization(
             new CustomizationDto(
                 logoUrl: config()->string('paymaya-sdk.checkout.customization.logoUrl'),
                 iconUrl: config()->string('paymaya-sdk.checkout.customization.iconUrl'),
@@ -27,18 +26,10 @@ class SetCustomizationCommand extends Command
                 showMerchantName: config()->boolean('paymaya-sdk.checkout.customization.showMerchantName', true),
                 redirectTimer: config()->integer('paymaya-sdk.checkout.customization.redirectTimer', 30),
             )
-        ));
+        );
 
-        if ($response->successful()) {
-            $this->info('Done registering customization');
+        $this->info('Done registering customization');
 
-            return self::SUCCESS;
-        }
-
-        $response->throw();
-
-        // @codeCoverageIgnoreStart
-        return self::FAILURE;
-        // @codeCoverageIgnoreEnd
+        return self::SUCCESS;
     }
 }

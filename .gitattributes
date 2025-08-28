@@ -14,3 +14,4 @@
 /pint.json          export-ignore
 /CHANGELOG.md       export-ignore
 /.run               export-ignore
+/composer.lock      export-ignore

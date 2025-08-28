@@ -90,7 +90,6 @@ You can copy the sample to test it.
 https://developers.maya.ph/reference/createv1checkout
 
 ``` php
-
 use Lloricode\LaravelPaymaya\Facades\PaymayaFacade;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\Amount\AmountDetailDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\Amount\AmountDto;
@@ -103,10 +102,6 @@ use Lloricode\Paymaya\DataTransferObjects\Checkout\ItemDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\MetaDataDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\RedirectUrlDto;
 use Lloricode\Paymaya\DataTransferObjects\Checkout\TotalAmountDto;
-use Lloricode\Paymaya\Requests\Checkout\CreateCheckoutRequest;
-use Lloricode\Paymaya\Requests\Checkout\GetCheckoutRequest;
-
-$api = PaymayaFacade::connector();
 
 $checkout = new CheckoutDto(
     totalAmount: new TotalAmountDto(
@@ -194,15 +189,13 @@ $checkout = new CheckoutDto(
 );
 
 // submit
-$checkoutResponse = $api->send(new CreateCheckoutRequest($checkout))->dto();
+$checkoutResponse = PaymayaFacade::createCheckout($checkout);
 
 echo 'id: '.$checkoutResponse->checkoutId."\n";
 echo 'url: '.$checkoutResponse->redirectUrl."\n";
 
 // retrieve
-$api->send(new GetCheckoutRequest($checkoutResponse->checkoutId))->dto();
-
-
+PaymayaFacade::getCheckout($checkoutResponse->checkoutId);
 ```
 
 ### Webhook

@@ -17,10 +17,10 @@ it(
     'register data',
     function () {
 
-        $sampleData = [sampleWebhookData()];
+        $sampleData = sampleWebhookData();
 
         MockClient::global([
-            GetAllWebhookRequest::class => new MockResponse(body: $sampleData),
+            GetAllWebhookRequest::class => new MockResponse(body: [$sampleData]),
             DeleteWebhookRequest::class => new MockResponse(status: 204),
             CreateWebhookRequest::class => new MockResponse(body: $sampleData),
         ]);
@@ -35,11 +35,12 @@ it(
     'register data eve 404',
     function () {
 
-        $sampleData = [sampleWebhookData()];
+        $sampleData = sampleWebhookData();
+
+        config()->set('paymaya-sdk.checkout.customization', $sampleData);
 
         MockClient::global([
             GetAllWebhookRequest::class => new MockResponse(status: 404),
-            DeleteWebhookRequest::class => new MockResponse(status: 204),
             CreateWebhookRequest::class => new MockResponse(body: $sampleData),
         ]);
 
