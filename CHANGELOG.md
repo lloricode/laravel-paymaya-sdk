@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
+## v3.1.0 - 2025-08-28
+
+**Full Changelog**: https://github.com/lloricode/laravel-paymaya-sdk/compare/v3.0.0...v3.1.0
+
 ## v3.0.0 - 2025-08-25
 
 ### What's Changed
